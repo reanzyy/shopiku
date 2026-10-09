@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- =============================== -->
+    <!--   SHOPIKU - Brand Colors        -->
+    <!-- =============================== -->
+
+    <!-- Primary Brand: Coral Orange -->
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#E64A19</color>
+    <color name="colorPrimaryLight">#FFCCBC</color>
+    <color name="colorPrimaryVariant">#FF7043</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Secondary Brand: Deep Teal -->
+    <color name="colorSecondary">#00796B</color>
+    <color name="colorSecondaryLight">#B2DFDB</color>
+    <color name="colorSecondaryVariant">#004D40</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+
+    <!-- Background -->
+    <color name="colorBackground">#F5F5F5</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorSurfaceVariant">#FAFAFA</color>
+    <color name="colorOnBackground">#212121</color>
+    <color name="colorOnSurface">#212121</color>
+
+    <!-- Text Colors -->
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="textHint">#BDBDBD</color>
+    <color name="textOnPrimary">#FFFFFF</color>
+    <color name="textDisabled">#9E9E9E</color>
+    <color name="textPrice">#FF5722</color>
+    <color name="textPriceStrike">#9E9E9E</color>
+
+    <!-- Status Colors -->
+    <color name="colorSuccess">#2E7D32</color>
+    <color name="colorSuccessLight">#C8E6C9</color>
+    <color name="colorWarning">#FF9800</color>
+    <color name="colorWarningLight">#FFE0B2</color>
+    <color name="colorError">#D32F2F</color>
+    <color name="colorErrorLight">#FFCDD2</color>
+    <color name="colorInfo">#1565C0</color>
+    <color name="colorInfoLight">#BBDEFB</color>
+
+    <!-- UI Element Colors -->
+    <color name="divider">#E0E0E0</color>
+    <color name="borderColor">#E0E0E0</color>
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="iconTint">#424242</color>
+    <color name="iconTintLight">#757575</color>
+
+    <!-- Rating Star -->
+    <color name="ratingStarFilled">#FFA726</color>
+    <color name="ratingStarEmpty">#E0E0E0</color>
+
+    <!-- Badge & Discount -->
+    <color name="badgeBackground">#FF5722</color>
+    <color name="badgeText">#FFFFFF</color>
+    <color name="discountBadge">#D32F2F</color>
+    <color name="discountBadgeText">#FFFFFF</color>
+    <color name="flashSaleBackground">#D32F2F</color>
+    <color name="flashSaleText">#FFFFFF</color>
+    <color name="flashSaleCountdown">#FFEB3B</color>
+
+    <!-- Timeline -->
+    <color name="timelineActive">#FF5722</color>
+    <color name="timelineInactive">#E0E0E0</color>
+    <color name="timelineCompleted">#2E7D32</color>
+
+    <!-- Overlay & Scrim -->
+    <color name="scrimBackground">#80000000</color>
+    <color name="shimmerBase">#E0E0E0</color>
+    <color name="shimmerHighlight">#F5F5F5</color>
+
+    <!-- Bottom Navigation -->
+    <color name="bottomNavActive">#FF5722</color>
+    <color name="bottomNavInactive">#9E9E9E</color>
+
+    <!-- Input Field -->
+    <color name="inputBackground">#F5F5F5</color>
+    <color name="inputBorderFocused">#FF5722</color>
+    <color name="inputBorderDefault">#E0E0E0</color>
+
+    <!-- Gradient Colors -->
+    <color name="gradientStart">#FF5722</color>
+    <color name="gradientEnd">#FF8A65</color>
+
+    <!-- Legacy support (existing codebase) -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="orange_primary">#FF5722</color>
+    <color name="orange_light">#FFF1EE</color>
+    <color name="gray_bg">#F5F5F5</color>
+    <color name="gray_text">#757575</color>
+    <color name="gray_border">#E0E0E0</color>
+    <color name="text_black">#212121</color>
+    <color name="green_status">#2E7D32</color>
+
+
+    <!-- SHOPIKU Extended Colors -->
+    <color name="surfaceContainerLowest">#FFFFFF</color>
+    <color name="surfaceContainerLow">#F6F3F2</color>
+    <color name="surfaceContainer">#F0EDED</color>
+    <color name="surfaceContainerHigh">#EAE7E7</color>
+    <color name="surfaceContainerHighest">#E5E2E1</color>
+    <color name="surfaceBright">#FCFAF9</color>
+    <color name="onSurfaceVariant">#5B4039</color>
+    <color name="outlineVariant">#E4BEB4</color>
+    <color name="primaryFixed">#FFDBD1</color>
+    <color name="primaryFixedDim">#FFB5A0</color>
+    <color name="secondaryFixed">#FFDBD1</color>
+    <color name="tertiaryFixed">#FFDBD1</color>
+    <color name="inverseOnSurface">#F3F0EF</color>
+    <color name="inverseSurface">#303030</color>
+    <color name="inversePrimary">#FFB5A0</color>
+    <color name="scrimOverlay40">#66000000</color>
+    <color name="scrimOverlay10">#1A000000</color>
+    <color name="colorAmber">#F59E0B</color>
+    <color name="colorStar">#F59E0B</color>
+
+    <!-- SHOPIKU - Material Design 3 Compatibility Colors -->
+
+    <!-- Primary -->
+    <color name="primary">#FF5722</color>
+    <color name="primary_container">#FFDBD1</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_fixed">#3D0A00</color>
+    <color name="on_primary_fixed_variant">#8C1D00</color>
+
+    <!-- Surface -->
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_container_low">#F6F3F2</color>
+    <color name="surface_container_high">#EAE7E7</color>
+    <color name="surface_container_highest">#E5E2E1</color>
+    <color name="on_surface">#212121</color>
+    <color name="on_surface_variant">#5B4039</color>
+    <color name="outline">#8D6E63</color>
+
+    <!-- Register Screen -->
+    <color name="register_promo_start">#FFF1EE</color>
+    <color name="register_promo_end">#FFDBD1</color>
+    <color name="register_icon_background">#FFCCBC</color>
+    <color name="register_input_background">#F5F5F5</color>
+    <color name="register_input_border">#E0E0E0</color>
+    <color name="register_phone_prefix">#F0EDED</color>
+    <color name="register_strength_weak">#D32F2F</color>
+    <color name="register_strength_medium">#FF9800</color>
+    <color name="register_strength_strong">#2E7D32</color>
+</resources>

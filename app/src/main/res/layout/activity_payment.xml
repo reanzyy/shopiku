@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/colorBackground" tools:context=".ui.view.PaymentActivity">
+    <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/colorSurface" app:elevation="2dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="64dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
+            <ImageView android:id="@+id/ivPaymentBack" android:layout_width="44dp" android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Kembali" android:padding="10dp" android:src="@android:drawable/ic_media_previous" app:tint="@color/textPrimary"/>
+            <ImageView android:id="@+id/ivPaymentLogo" android:layout_width="28dp" android:layout_height="28dp" android:contentDescription="Logo" android:src="@drawable/ic_launcher_foreground"/>
+            <TextView android:id="@+id/tvPaymentTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_weight="1" android:text="Checkout" android:textColor="@color/textPrimary" android:textSize="16sp" android:textStyle="bold"/>
+            <ImageView android:id="@+id/ivPaymentShare" android:layout_width="44dp" android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Bagikan" android:padding="10dp" android:src="@android:drawable/ic_menu_share" app:tint="@color/onSurfaceVariant"/>
+            <ImageView android:id="@+id/ivPaymentAvatar" android:layout_width="32dp" android:layout_height="32dp" android:contentDescription="Profil" android:src="@mipmap/ic_launcher"/>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:clipToPadding="false" android:paddingBottom="112dp" app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+            <LinearLayout android:id="@+id/cardPaymentCountdown" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="14dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Selesaikan Pembayaran Dalam" android:textColor="@color/onSurfaceVariant" android:textSize="12sp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/tvPaymentTimer" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_filter_pill_active" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:text="23:58:42" android:textColor="@color/colorPrimary" android:textSize="14sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Batas waktu pembayaran" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sabtu, 11 Okt 2026, 09:41 WIB" android:textColor="@color/textPrimary" android:textSize="11sp" android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/cardVirtualAccount" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                    <TextView android:layout_width="42dp" android:layout_height="42dp" android:background="@color/surfaceContainerHigh" android:gravity="center" android:text="BCA" android:textColor="@color/colorPrimary" android:textSize="15sp" android:textStyle="bold"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:id="@+id/tvBankName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BCA Virtual Account" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Verifikasi Otomatis 24 Jam" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#10003;" android:textColor="@color/colorSecondary" android:textSize="22sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:background="@color/surfaceContainerLow" android:orientation="vertical" android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nomor Virtual Account" android:textColor="@color/textSecondary" android:textSize="11sp" android:textStyle="bold"/>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:gravity="center_vertical">
+                        <TextView android:id="@+id/tvVirtualAccount" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:letterSpacing="0.06" android:text="8277 0812 3456 7890" android:textColor="@color/textPrimary" android:textSize="20sp" android:textStyle="bold"/>
+                        <com.google.android.material.button.MaterialButton android:id="@+id/btnCopyVA" style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="wrap_content" android:layout_height="40dp" android:text="Salin" android:textColor="@color/colorPrimary" android:textSize="12sp" app:cornerRadius="8dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:orientation="vertical">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Nama Pelanggan" android:textColor="@color/textSecondary" android:textSize="13sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SHOPIKU / Adriansyah Suryawan" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="center_vertical">
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Tagihan" android:textColor="@color/textSecondary" android:textSize="13sp"/>
+                            <TextView android:id="@+id/tvPaymentTotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp405.000" android:textColor="@color/colorSecondary" android:textSize="20sp" android:textStyle="bold"/>
+                        </LinearLayout>
+                        <com.google.android.material.button.MaterialButton android:id="@+id/btnCopyAmount" style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="wrap_content" android:layout_height="40dp" android:text="Salin Jumlah" android:textColor="@color/colorPrimary" android:textSize="12sp" app:cornerRadius="8dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_filter_pill_active" android:padding="10dp" android:text="Verifikasi otomatis berlangsung dalam 1-3 menit tanpa upload bukti struk." android:textColor="@color/colorPrimary" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/cardSandboxMode" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sandbox Mode / Simulasi Developer" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Uji alur callback pembayaran instan tanpa memotong saldo bank nyata." android:textColor="@color/textSecondary" android:textSize="12sp"/>
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@color/surfaceContainerHigh" android:paddingHorizontal="8dp" android:paddingVertical="3dp" android:text="DEV TOOL" android:textColor="@color/onSurfaceVariant" android:textSize="9sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <TextView android:id="@+id/tvPaymentStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@color/surfaceContainer" android:padding="12dp" android:text="Status Transaksi Saat Ini\nMenunggu Pembayaran (Pending)" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Pilih Skenario Respon:" android:textColor="@color/textSecondary" android:textSize="11sp" android:textStyle="bold"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnSimulatePayment" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="8dp" android:backgroundTint="@color/colorPrimary" android:text="Simulasikan Pembayaran Berhasil" android:textColor="@color/colorOnPrimary" android:textStyle="bold" app:cornerRadius="12dp"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnSimulatePending" style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="6dp" android:text="Simulasikan Menunggu Pembayaran" android:textColor="@color/textPrimary" app:cornerRadius="12dp"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnSimulateExpired" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="6dp" android:backgroundTint="@color/colorErrorLight" android:text="Simulasikan Pembayaran Kedaluwarsa" android:textColor="@color/colorError" android:textStyle="bold" app:cornerRadius="12dp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/cardPaymentGuide" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Panduan Pembayaran BCA" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3 Metode" android:textColor="@color/colorPrimary" android:textSize="11sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:background="@color/surfaceContainerLow" android:padding="12dp" android:text="m-BCA (BCA Mobile)\n1. Buka BCA Mobile, pilih m-Transfer &gt; BCA Virtual Account.\n2. Masukkan nomor VA 8277081234567890 lalu tekan Send.\n3. Periksa tagihan Rp405.000 atas nama SHOPIKU / Adriansyah Suryawan.\n4. Masukkan PIN m-BCA dan simpan bukti transaksi digital." android:textColor="@color/textPrimary" android:textSize="12sp"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:background="@color/surfaceContainerLow" android:padding="12dp" android:text="KlikBCA (Internet Banking)\n1. Login ke KlikBCA Individual.\n2. Pilih Transfer Dana &gt; Transfer ke BCA Virtual Account.\n3. Ketik nomor VA 8277 0812 3456 7890 dan otorisasi dengan KeyBCA." android:textColor="@color/textPrimary" android:textSize="12sp"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:background="@color/surfaceContainerLow" android:padding="12dp" android:text="ATM BCA\n1. Masukkan kartu ATM dan PIN BCA.\n2. Pilih Transaksi Lainnya &gt; Transfer &gt; Ke Rek BCA Virtual Account.\n3. Input VA 8277081234567890, verifikasi jumlah Rp405.000, lalu tekan Ya." android:textColor="@color/textPrimary" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/cardOrderSummary" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Ringkasan Pesanan" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/tvOrderId" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@color/surfaceContainer" android:paddingHorizontal="8dp" android:paddingVertical="3dp" android:text="ORD-20261009-001" android:textColor="@color/onSurfaceVariant" android:textSize="10sp"/>
+                </LinearLayout>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Wireless Earbuds Pro ANC\n1x Unit • Hitam Matte                                      Rp275.000" android:textColor="@color/textPrimary" android:textSize="12sp"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Tas Ransel Anti Air Laptop\n1x Unit • Navy Minimalis                                  Rp130.000" android:textColor="@color/textPrimary" android:textSize="12sp"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@color/surfaceContainerLow" android:padding="12dp" android:text="Subtotal 2 Produk                                      Rp405.000\nBiaya Layanan &amp; Penanganan                    Rp0 (Promo)\n\nTotal Pembayaran                                  Rp405.000" android:textColor="@color/colorSecondary" android:textSize="13sp" android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:background="@color/colorSurface" android:elevation="12dp" android:orientation="vertical" android:paddingHorizontal="16dp" android:paddingVertical="12dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnCheckStatus" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:backgroundTint="@color/colorPrimary" android:text="Cek Status Pembayaran" android:textColor="@color/colorOnPrimary" android:textStyle="bold" app:cornerRadius="12dp"/>
+            <ImageView android:id="@+id/btnChangeMethod" android:layout_width="48dp" android:layout_height="48dp" android:layout_marginStart="8dp" android:background="@drawable/bg_wallet_strip" android:contentDescription="Ganti Metode" android:padding="12dp" android:src="@android:drawable/ic_menu_rotate" app:tint="@color/onSurfaceVariant"/>
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:gravity="center" android:text="Pembayaran Aman &amp; Terenkripsi oleh SHOPIKUShield" android:textColor="@color/textSecondary" android:textSize="10sp"/>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

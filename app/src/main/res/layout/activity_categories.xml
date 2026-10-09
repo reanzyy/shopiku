@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surfaceBright">
+
+    <!-- ===== TOP BAR ===== -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surfaceContainerLowest"
+        app:elevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/tvCategoryTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Kategori"
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnSearchShortcut"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="⌕"
+                android:textColor="@color/onSurfaceVariant"
+                android:textSize="26sp" />
+
+            <FrameLayout
+                android:id="@+id/btnCartShortcut"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="🛒"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/bg_circle_btn"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/ivProfileInitial"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_circle_btn"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="👤"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ===== INTERACTIVE SEARCH BAR ===== -->
+            <LinearLayout
+                android:id="@+id/searchCategoryContainer"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_search_home_v2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⌕"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/searchCategory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Temukan kategori atau produk..."
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:padding="0dp"
+                    android:singleLine="true"
+                    android:textColor="@color/textPrimary"
+                    android:textColorHint="@color/textSecondary"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/btnClearCategorySearch"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Hapus pencarian"
+                    android:padding="9dp"
+                    android:src="@drawable/ic_remove"
+                    app:tint="@color/onSurfaceVariant"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/btnVoiceSearch"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="🎙"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- ===== FEATURED SEASONAL CATEGORY BANNER ===== -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/colorPrimary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_filter_pill_inactive"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="🔥 PILIHAN MUSIM INI"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Gadget &amp; Elektronik"
+                            android:textColor="@color/colorOnPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Diskon hingga 60% eksklusif pekan ini"
+                            android:textColor="@color/colorOnPrimary"
+                            android:textSize="12sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExploreFeatured"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="10dp"
+                            android:backgroundTint="@color/surfaceContainerLowest"
+                            android:text="Jelajahi Sekarang  ›"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/bg_category_icon_v2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="🎧⌚"
+                            android:textSize="28sp" />
+                    </FrameLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <!-- ===== CATEGORY EXPLORATION GRID ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Eksplorasi Kategori"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12 departemen belanja resmi SHOPIKU"
+                            android:textColor="@color/textSecondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_filter_pill_active"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="Lengkap"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <GridLayout
+                    android:id="@+id/gridCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:columnCount="4"
+                    android:rowCount="3">
+
+                    <!-- 1 Elektronik -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFE0B2" android:text="💻" />
+                        <TextView style="@style/CategoryNameText" android:text="Elektronik" />
+                        <TextView style="@style/CategoryCountText" android:text="1.240 item" />
+                    </LinearLayout>
+
+                    <!-- 2 Fashion Pria -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFBBDEFB" android:text="👕" />
+                        <TextView style="@style/CategoryNameText" android:text="Pria" />
+                        <TextView style="@style/CategoryCountText" android:text="3.820 item" />
+                    </LinearLayout>
+
+                    <!-- 3 Fashion Wanita -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFF8BBD0" android:text="👗" />
+                        <TextView style="@style/CategoryNameText" android:text="Wanita" />
+                        <TextView style="@style/CategoryCountText" android:text="4.150 item" />
+                    </LinearLayout>
+
+                    <!-- 4 Kecantikan -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFCDD2" android:text="✨" />
+                        <TextView style="@style/CategoryNameText" android:text="Kecantikan" />
+                        <TextView style="@style/CategoryCountText" android:text="2.410 item" />
+                    </LinearLayout>
+
+                    <!-- 5 Perabot -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFECB3" android:text="🪑" />
+                        <TextView style="@style/CategoryNameText" android:text="Perabot" />
+                        <TextView style="@style/CategoryCountText" android:text="1.890 item" />
+                    </LinearLayout>
+
+                    <!-- 6 Kuliner -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFC8E6C9" android:text="🍽" />
+                        <TextView style="@style/CategoryNameText" android:text="Kuliner" />
+                        <TextView style="@style/CategoryCountText" android:text="950 item" />
+                    </LinearLayout>
+
+                    <!-- 7 Olahraga -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFB2DFDB" android:text="🏋" />
+                        <TextView style="@style/CategoryNameText" android:text="Olahraga" />
+                        <TextView style="@style/CategoryCountText" android:text="780 item" />
+                    </LinearLayout>
+
+                    <!-- 8 Gaming -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFC5CAE9" android:text="🎮" />
+                        <TextView style="@style/CategoryNameText" android:text="Gaming" />
+                        <TextView style="@style/CategoryCountText" android:text="1.120 item" />
+                    </LinearLayout>
+
+                    <!-- 9 Otomotif -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFD1C4E9" android:text="🏍" />
+                        <TextView style="@style/CategoryNameText" android:text="Otomotif" />
+                        <TextView style="@style/CategoryCountText" android:text="640 item" />
+                    </LinearLayout>
+
+                    <!-- 10 Aksesoris -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFF9C4" android:text="⌚" />
+                        <TextView style="@style/CategoryNameText" android:text="Aksesoris" />
+                        <TextView style="@style/CategoryCountText" android:text="2.100 item" />
+                    </LinearLayout>
+
+                    <!-- 11 Hobi -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFB2EBF2" android:text="📷" />
+                        <TextView style="@style/CategoryNameText" android:text="Hobi" />
+                        <TextView style="@style/CategoryCountText" android:text="530 item" />
+                    </LinearLayout>
+
+                    <!-- 12 Kesehatan -->
+                    <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
+                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFB2DFDB" android:text="⚕" />
+                        <TextView style="@style/CategoryNameText" android:text="Kesehatan" />
+                        <TextView style="@style/CategoryCountText" android:text="890 item" />
+                    </LinearLayout>
+
+                </GridLayout>
+            </LinearLayout>
+            <!-- ===== POPULAR SUBCATEGORIES ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="📈  Subkategori Populer"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSeeAllSubcategories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lihat Semua ›"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_active" android:gravity="center" android:paddingHorizontal="14dp" android:text="🎧  Headphone Nirkabel" android:textColor="@color/colorPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="⌚  Smartwatch" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="👔  Baju Kemeja Pria" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="👟  Sneakers Pria" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="🧴  Skincare Serum" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="🍳  Peralatan Masak" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <!-- ===== SELECTED OFFICIAL BRANDS ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Brand Resmi Terpilih"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jaminan 100% orisinal &amp; garansi uang kembali"
+                            android:textColor="@color/textSecondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✓"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Brand Card 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_category_icon_v2"
+                        android:gravity="center"
+                        android:text="🎧"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AudioTech ID  ✓"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="★ 4.9  •  480+ Produk Audio"
+                            android:textColor="@color/textSecondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFollowAudioTech"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:backgroundTint="@color/surfaceContainerLow"
+                        android:text="Ikuti"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Brand Card 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_category_icon_v2"
+                        android:gravity="center"
+                        android:text="👟"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Urban Style Co.  ✓"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="★ 4.8  •  1.250+ Pakaian"
+                            android:textColor="@color/textSecondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFollowUrbanStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:backgroundTint="@color/surfaceContainerLow"
+                        android:text="Ikuti"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Brand Card 3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_category_icon_v2"
+                        android:gravity="center"
+                        android:text="🌸"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GlowSkin Official  ✓"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="★ 4.9  •  310+ Serum &amp; Cream"
+                            android:textColor="@color/textSecondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFollowGlowSkin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:backgroundTint="@color/surfaceContainerLow"
+                        android:text="Ikuti"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ===== TRUST FOOTER NOTE ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/surfaceContainerLow"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🛡"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="Semua kategori diawasi sistem proteksi pembeli SHOPIKU"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorSurface"
+        app:elevation="8dp"
+        app:itemIconTint="@color/bottom_nav_color_state"
+        app:itemTextColor="@color/bottom_nav_color_state"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

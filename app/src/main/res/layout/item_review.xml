@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cardBackground"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/padding_screen"
+    android:paddingVertical="@dimen/spacing_12">
+
+    <!-- Header: Avatar + Nama + Rating + Tanggal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Avatar -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivReviewAvatar"
+            android:layout_width="@dimen/review_avatar"
+            android:layout_height="@dimen/review_avatar"
+            android:contentDescription="@string/review_avatar_desc"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+        <!-- Info User -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_10"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvReviewUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                tools:text="Budi S." />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBarReview"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:progressTint="@color/ratingStarFilled"
+                    android:rating="5"
+                    android:stepSize="1" />
+
+                <TextView
+                    android:id="@+id/tvReviewDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_8"
+                    android:textColor="@color/textHint"
+                    android:textSize="@dimen/text_tiny"
+                    tools:text="09 Okt 2024" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Variasi yang Dibeli -->
+    <TextView
+        android:id="@+id/tvReviewVariant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:background="@drawable/bg_status"
+        android:paddingHorizontal="@dimen/spacing_6"
+        android:paddingVertical="@dimen/spacing_2"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_tiny"
+        tools:text="Variasi: Hitam, L" />
+
+    <!-- Komentar Ulasan -->
+    <TextView
+        android:id="@+id/tvReviewComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:lineSpacingExtra="3dp"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_body"
+        tools:text="Produknya bagus dan sesuai deskripsi. Pengiriman cepat, packing aman. Sangat direkomendasikan untuk yang butuh headphone berkualitas!" />
+
+    <!-- Foto Ulasan (horizontal scroll) -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/reviewPhotosContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Photo 1 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="@dimen/review_photo_size"
+                android:layout_height="@dimen/review_photo_size"
+                android:layout_marginEnd="@dimen/spacing_6"
+                app:cardCornerRadius="@dimen/radius_medium"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/borderColor">
+
+                <ImageView
+                    android:id="@+id/ivReviewPhoto1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/review_photo_desc"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Photo 2 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="@dimen/review_photo_size"
+                android:layout_height="@dimen/review_photo_size"
+                android:layout_marginEnd="@dimen/spacing_6"
+                app:cardCornerRadius="@dimen/radius_medium"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/borderColor">
+
+                <ImageView
+                    android:id="@+id/ivReviewPhoto2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/review_photo_desc"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <!-- Tombol Membantu -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHelpful"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:paddingHorizontal="@dimen/spacing_12"
+            android:paddingVertical="@dimen/spacing_4"
+            android:text="@string/btn_helpful"
+            android:textSize="@dimen/text_small"
+            app:cornerRadius="@dimen/radius_chip"
+            app:icon="@android:drawable/btn_plus"
+            app:iconSize="@dimen/icon_size_small"
+            app:strokeColor="@color/borderColor" />
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_thickness"
+        android:layout_marginTop="@dimen/spacing_12"
+        android:background="@color/divider" />
+
+</LinearLayout>

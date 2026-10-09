@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- =============================== -->
+    <!--   SHOPIKU - App Strings         -->
+    <!-- =============================== -->
+
+    <!-- App Info -->
+    <string name="app_name">Shopiku</string>
+    <string name="app_tagline">Belanja Mudah, Hidup Lebih Baik</string>
+    <string name="app_version">v1.0.0</string>
+
+    <!-- Splash -->
+    <string name="splash_loading">Memuat aplikasi&#8230;</string>
+
+    <!-- Auth - Login -->
+    <string name="login_title">Masuk ke Shopiku</string>
+    <string name="login_subtitle">Masuk untuk melanjutkan belanja</string>
+    <string name="label_email">Email</string>
+    <string name="label_email_or_username">Email atau Username</string>
+    <string name="label_password">Kata Sandi</string>
+    <string name="hint_email">Masukkan email Anda</string>
+    <string name="hint_password">Masukkan kata sandi</string>
+    <string name="btn_login">Masuk</string>
+    <string name="btn_login_google">Masuk dengan Google</string>
+    <string name="remember_me">Ingat saya</string>
+    <string name="forgot_password">Lupa Kata Sandi?</string>
+    <string name="no_account">Belum punya akun?</string>
+    <string name="go_register">Daftar Sekarang</string>
+    <string name="or_divider">atau</string>
+
+    <!-- Auth - Register -->
+    <string name="register_title">Daftar Akun Baru</string>
+    <string name="register_subtitle">Buat akun untuk mulai belanja</string>
+    <string name="label_full_name">Nama Lengkap</string>
+    <string name="label_phone">Nomor Telepon</string>
+    <string name="label_confirm_password">Konfirmasi Kata Sandi</string>
+    <string name="hint_full_name">Masukkan nama lengkap</string>
+    <string name="hint_email_register">Masukkan email aktif</string>
+    <string name="hint_phone">Contoh: 08123456789</string>
+    <string name="hint_password_register">Minimal 8 karakter</string>
+    <string name="hint_confirm_password">Ulangi kata sandi</string>
+    <string name="btn_register">Daftar</string>
+    <string name="have_account">Sudah punya akun?</string>
+    <string name="go_login">Masuk</string>
+    <string name="terms_agreement">Dengan mendaftar, Anda menyetujui Syarat &amp; Ketentuan dan Kebijakan Privasi Shopiku</string>
+
+    <!-- Home -->
+    <string name="home_greeting">Halo, </string>
+    <string name="home_greeting_default">Halo, Pembeli!</string>
+    <string name="search_hint">Cari produk, toko, brand&#8230;</string>
+    <string name="notification">Notifikasi</string>
+    <string name="cart">Keranjang</string>
+    <string name="promo_banner">Promo Spesial</string>
+    <string name="section_categories">Kategori</string>
+    <string name="section_flash_sale">Flash Sale</string>
+    <string name="section_recommendations">Rekomendasi Untukmu</string>
+    <string name="flash_sale_ends">Berakhir dalam</string>
+    <string name="see_all">Lihat Semua</string>
+    <string name="swipe_refresh">Tarik untuk memperbarui</string>
+
+    <!-- Categories -->
+    <string name="category_electronics">Elektronik</string>
+    <string name="category_fashion_men">Fashion Pria</string>
+    <string name="category_fashion_women">Fashion Wanita</string>
+    <string name="category_beauty">Kecantikan</string>
+    <string name="category_home">Rumah Tangga</string>
+    <string name="category_food">Makanan</string>
+    <string name="category_sports">Olahraga</string>
+    <string name="category_gaming">Gaming</string>
+    <string name="category_automotive">Otomotif</string>
+    <string name="category_accessories">Aksesoris</string>
+    <string name="category_all">Semua Kategori</string>
+    <string name="category_title">Kategori Produk</string>
+    <string name="product_count_format">%d produk</string>
+
+    <!-- Product List -->
+    <string name="product_list_title">Daftar Produk</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Urutkan</string>
+    <string name="product_count_result">%d produk ditemukan</string>
+    <string name="no_products_found">Produk tidak ditemukan</string>
+    <string name="try_different_keyword">Coba kata kunci lain</string>
+
+    <!-- Product Card -->
+    <string name="product_image_desc">Gambar produk</string>
+    <string name="sold_count_format">%s terjual</string>
+    <string name="rating_format">%.1f</string>
+    <string name="discount_format">-%d%%</string>
+    <string name="location_prefix">📍 </string>
+
+    <!-- Product Detail -->
+    <string name="product_detail_title">Detail Produk</string>
+    <string name="btn_add_to_cart">+ Keranjang</string>
+    <string name="btn_buy_now">Beli Sekarang</string>
+    <string name="btn_chat_seller">Chat Penjual</string>
+    <string name="label_sold">Terjual</string>
+    <string name="label_rating">Rating</string>
+    <string name="label_description">Deskripsi Produk</string>
+    <string name="label_variant_color">Pilih Warna</string>
+    <string name="label_variant_size">Pilih Ukuran</string>
+    <string name="label_quantity">Jumlah</string>
+    <string name="label_seller_info">Informasi Penjual</string>
+    <string name="label_shipping">Informasi Pengiriman</string>
+    <string name="label_specifications">Spesifikasi Produk</string>
+    <string name="label_reviews">Ulasan Pembeli</string>
+    <string name="favorite">Favorit</string>
+    <string name="share_product">Bagikan Produk</string>
+    <string name="stock_available">Stok tersedia</string>
+    <string name="shipping_from">Dikirim dari</string>
+    <string name="free_shipping">Gratis Ongkir</string>
+    <string name="btn_see_all_reviews">Lihat Semua Ulasan</string>
+
+    <!-- Cart -->
+    <string name="cart_title">Keranjang Belanja</string>
+    <string name="cart_edit">Ubah</string>
+    <string name="cart_done">Selesai</string>
+    <string name="cart_empty_title">Keranjang Kosong</string>
+    <string name="cart_empty_desc">Yuk, mulai belanja dan tambahkan produk ke keranjang!</string>
+    <string name="cart_select_all">Pilih Semua</string>
+    <string name="cart_total">Total:</string>
+    <string name="btn_checkout">Beli (%d)</string>
+    <string name="btn_checkout_default">Beli</string>
+    <string name="label_variant">Variasi: %s</string>
+    <string name="btn_delete">Hapus</string>
+    <string name="cart_item_image_desc">Gambar produk di keranjang</string>
+
+    <!-- Checkout -->
+    <string name="checkout_title">Konfirmasi Pesanan</string>
+    <string name="label_shipping_address">Alamat Pengiriman</string>
+    <string name="label_receiver">Penerima</string>
+    <string name="btn_change_address">Ganti Alamat</string>
+    <string name="btn_add_address">+ Tambah Alamat</string>
+    <string name="label_courier">Pilih Kurir</string>
+    <string name="courier_jne">JNE Reguler</string>
+    <string name="courier_jnt">J\&amp;T Express</string>
+    <string name="courier_sicepat">SiCepat Reguler</string>
+    <string name="courier_anteraja">AnterAja</string>
+    <string name="estimated_delivery">Estimasi tiba: %s</string>
+    <string name="label_voucher">Voucher Shopiku</string>
+    <string name="btn_use_voucher">Gunakan Voucher</string>
+    <string name="label_payment_summary">Ringkasan Pembayaran</string>
+    <string name="label_subtotal">Subtotal</string>
+    <string name="label_shipping_cost">Ongkos Kirim</string>
+    <string name="label_discount">Diskon</string>
+    <string name="label_total_payment">Total Pembayaran</string>
+    <string name="btn_order">Buat Pesanan</string>
+    <string name="location_icon_desc">Ikon lokasi</string>
+
+    <!-- Payment -->
+    <string name="payment_title">Pembayaran</string>
+    <string name="payment_pending">Menunggu Pembayaran</string>
+    <string name="payment_label_virtual_account">Virtual Account</string>
+    <string name="payment_bank">Bank BCA</string>
+    <string name="payment_va_number">1234 5678 9012</string>
+    <string name="btn_copy_va">Salin Nomor VA</string>
+    <string name="payment_countdown_label">Bayar sebelum:</string>
+    <string name="payment_label_total">Total Pembayaran</string>
+    <string name="payment_label_order_id">ID Pesanan</string>
+    <string name="payment_label_method">Metode Pembayaran</string>
+    <string name="btn_simulate_payment">Simulasikan Pembayaran Berhasil</string>
+    <string name="payment_instruction_title">Cara Pembayaran</string>
+    <string name="payment_instruction">1. Buka aplikasi m-banking Anda\n2. Pilih menu Transfer / Virtual Account\n3. Masukkan nomor VA di atas\n4. Konfirmasi pembayaran</string>
+    <string name="payment_status_icon_desc">Status pembayaran</string>
+    <string name="bank_logo_desc">Logo bank</string>
+
+    <!-- Order Tracking -->
+    <string name="tracking_title">Lacak Pesanan</string>
+    <string name="order_status_created">Pesanan Dibuat</string>
+    <string name="order_status_paid">Pembayaran Berhasil</string>
+    <string name="order_status_processed">Pesanan Diproses</string>
+    <string name="order_status_shipped">Pesanan Dikirim</string>
+    <string name="order_status_delivered">Pesanan Diterima</string>
+    <string name="label_courier_tracking">Kurir</string>
+    <string name="label_tracking_number">Nomor Resi</string>
+    <string name="btn_copy_tracking">Salin Resi</string>
+    <string name="label_order_info">Informasi Pesanan</string>
+    <string name="order_id_format">ID: %s</string>
+    <string name="order_status_icon_desc">Status pesanan</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Akun Saya</string>
+    <string name="btn_edit_profile">Edit Profil</string>
+    <string name="menu_my_orders">Pesanan Saya</string>
+    <string name="menu_waiting_payment">Menunggu Pembayaran</string>
+    <string name="menu_processed">Diproses</string>
+    <string name="menu_shipped">Dikirim</string>
+    <string name="menu_completed">Selesai</string>
+    <string name="menu_transaction_history">Riwayat Transaksi</string>
+    <string name="menu_my_address">Alamat Saya</string>
+    <string name="menu_wishlist">Wishlist</string>
+    <string name="menu_settings">Pengaturan</string>
+    <string name="menu_help">Bantuan</string>
+    <string name="btn_logout">Keluar dari Akun</string>
+    <string name="profile_photo_desc">Foto profil</string>
+    <string name="profile_default_name">Nama Pengguna</string>
+    <string name="profile_default_email">email@example.com</string>
+
+    <!-- Reviews -->
+    <string name="reviews_title">Ulasan Produk</string>
+    <string name="average_rating_format">%.1f</string>
+    <string name="review_count_format">%d ulasan</string>
+    <string name="label_rating_5">5 Bintang</string>
+    <string name="label_rating_4">4 Bintang</string>
+    <string name="label_rating_3">3 Bintang</string>
+    <string name="label_rating_2">2 Bintang</string>
+    <string name="label_rating_1">1 Bintang</string>
+    <string name="btn_helpful">Membantu</string>
+    <string name="helpful_count_format">Membantu (%d)</string>
+    <string name="review_avatar_desc">Avatar pengguna</string>
+    <string name="review_photo_desc">Foto ulasan</string>
+    <string name="purchased_variant">Variasi: %s</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Beranda</string>
+    <string name="nav_categories">Kategori</string>
+    <string name="nav_cart">Keranjang</string>
+    <string name="nav_orders">Pesanan</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Empty States -->
+    <string name="empty_title_generic">Tidak Ada Data</string>
+    <string name="empty_desc_generic">Data belum tersedia saat ini</string>
+    <string name="empty_search_title">Tidak Ada Hasil</string>
+    <string name="empty_search_desc">Coba kata kunci atau filter yang berbeda</string>
+    <string name="empty_cart_title">Keranjang Kosong</string>
+    <string name="empty_cart_desc">Tambahkan produk favoritmu ke keranjang</string>
+    <string name="empty_wishlist_title">Wishlist Kosong</string>
+    <string name="empty_wishlist_desc">Simpan produk favoritmu di sini</string>
+    <string name="empty_orders_title">Belum Ada Pesanan</string>
+    <string name="empty_orders_desc">Mulai belanja dan pesanan kamu akan muncul di sini</string>
+    <string name="btn_start_shopping">Mulai Belanja</string>
+    <string name="btn_try_again">Coba Lagi</string>
+    <string name="btn_back_home">Kembali ke Beranda</string>
+
+    <!-- Error States -->
+    <string name="error_title">Terjadi Kesalahan</string>
+    <string name="error_no_connection">Tidak Ada Koneksi Internet</string>
+    <string name="error_no_connection_desc">Periksa koneksi internet Anda dan coba lagi</string>
+    <string name="error_server">Server Bermasalah</string>
+    <string name="error_server_desc">Kami sedang memperbaiki masalah ini. Silakan coba beberapa saat lagi</string>
+    <string name="error_timeout">Koneksi Timeout</string>
+    <string name="error_generic_desc">Sesuatu tidak berjalan dengan benar. Silakan coba lagi</string>
+    <string name="btn_retry">Coba Lagi</string>
+
+    <!-- Loading -->
+    <string name="loading_general">Memuat&#8230;</string>
+    <string name="loading_products">Memuat produk&#8230;</string>
+    <string name="loading_payment">Memproses pembayaran&#8230;</string>
+
+    <!-- Common Actions -->
+    <string name="btn_confirm">Konfirmasi</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="btn_save">Simpan</string>
+    <string name="btn_back">Kembali</string>
+    <string name="btn_close">Tutup</string>
+    <string name="btn_next">Lanjutkan</string>
+    <string name="btn_done">Selesai</string>
+    <string name="btn_apply">Terapkan</string>
+
+    <!-- Price -->
+    <string name="price_format">Rp%,.0f</string>
+    <string name="free">Gratis</string>
+    <string name="original_price_format">Rp%,.0f</string>
+
+    <!-- Flash Sale Item -->
+    <string name="flash_sale_image_desc">Gambar produk flash sale</string>
+    <string name="flash_sale_stock_format">Sisa %d%%</string>
+
+    <!-- Order Item -->
+    <string name="order_total_format">Total: Rp%,.0f</string>
+    <string name="order_qty_format">x%d</string>
+    <string name="btn_buy_again">Beli Lagi</string>
+    <string name="btn_review_product">Beri Ulasan</string>
+    <string name="btn_track_order">Lacak Pesanan</string>
+    <string name="order_item_image_desc">Gambar produk pesanan</string>
+
+    <!-- Banner -->
+    <string name="banner_image_desc">Banner promosi</string>
+    <string name="banner_cta">Belanja Sekarang</string>
+
+    <!-- Seller Info -->
+    <string name="seller_avatar_desc">Avatar penjual</string>
+    <string name="seller_location">Lokasi: %s</string>
+    <string name="seller_rating">Rating Toko: %s</string>
+    <string name="seller_products">%d Produk</string>
+    <string name="btn_visit_store">Kunjungi Toko</string>
+
+    <!-- Misc -->
+    <string name="copied_to_clipboard">Disalin ke clipboard</string>
+    <string name="added_to_cart">Produk berhasil ditambahkan ke keranjang</string>
+    <string name="added_to_wishlist">Produk ditambahkan ke wishlist</string>
+    <string name="removed_from_wishlist">Produk dihapus dari wishlist</string>
+    <string name="order_success">Pesanan berhasil dibuat!</string>
+    <string name="payment_success">Pembayaran berhasil!</string>
+
+
+    <!-- SHOPIKU Home Strings -->
+    <string name="app_name_shopiku">SHOPIKU</string>
+    <string name="nav_label_beranda">Beranda</string>
+    <string name="greeting_prefix">Halo, </string>
+    <string name="deliver_to">Kirim ke</string>
+    <string name="location_text"><b>Cirebon</b> • Jawa Barat</string>
+    <string name="btn_chat">Pesan</string>
+    <string name="search_hint_home">Cari produk, kategori, atau toko&#8230;</string>
+    <string name="btn_voice_search">Cari dengan suara</string>
+    <string name="btn_camera_search">Cari dengan kamera</string>
+    <string name="promo_badge_label">Spesial Gajian</string>
+    <string name="promo_title">Super Promo Gajian Diskon Hingga 50%!</string>
+    <string name="promo_subtitle">Gratis ongkir ke seluruh Indonesia + Cashback 15rb</string>
+    <string name="btn_claim_voucher">Klaim Voucher Sekarang</string>
+    <string name="wallet_label">SHOPIKUPay Saldo</string>
+    <string name="wallet_amount">Rp452.800</string>
+    <string name="coin_label">SHOPIKUKoin</string>
+    <string name="coin_amount">1.450 Poin</string>
+    <string name="btn_topup">Top Up</string>
+    <string name="section_flash_sale_title">Flash Sale</string>
+    <string name="flash_sale_sold_format">%d%% Terjual</string>
+    <string name="filter_all">Semua</string>
+    <string name="filter_bestseller">Terlaris</string>
+    <string name="filter_discount">Diskon Spesial</string>
+    <string name="filter_local">Lokal Cirebon</string>
+    <string name="label_best_pick">Pilihan Terbaik</string>
+    <string name="label_recommendations">Rekomendasi Untukmu</string>
+    <string name="btn_load_more">Muat Lebih Banyak Produk</string>
+    <string name="badge_official">Official</string>
+    <string name="content_desc_logo">Logo SHOPIKU</string>
+    <string name="content_desc_profile_avatar">Foto Profil</string>
+    <string name="content_desc_change_location">Ubah alamat pengiriman</string>
+    <string name="content_desc_wishlist">Favoritkan</string>
+    <string name="content_desc_mic">Cari dengan suara</string>
+    <string name="content_desc_camera">Cari dengan kamera</string>
+</resources>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/flash_sale_item_width"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_4"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/cardBackground"
+    app:cardCornerRadius="@dimen/radius_card"
+    app:cardElevation="@dimen/elevation_card"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Gambar Produk -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/flash_sale_image_height">
+
+            <ImageView
+                android:id="@+id/ivFlashSaleImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/flash_sale_image_desc"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+
+            <!-- Badge Diskon Flash Sale -->
+            <TextView
+                android:id="@+id/tvFlashSaleDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:background="@drawable/bg_flash_sale_badge"
+                android:paddingHorizontal="@dimen/spacing_6"
+                android:paddingVertical="@dimen/spacing_2"
+                android:textColor="@color/flashSaleText"
+                android:textSize="@dimen/text_tiny"
+                android:textStyle="bold"
+                tools:text="-50%" />
+
+        </FrameLayout>
+
+        <!-- Info Produk Flash Sale -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/spacing_8"
+            android:paddingTop="@dimen/spacing_6"
+            android:paddingBottom="@dimen/spacing_8">
+
+            <!-- Harga Flash Sale -->
+            <TextView
+                android:id="@+id/tvFlashSalePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrice"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                tools:text="Rp 99.000" />
+
+            <!-- Harga Normal (dicoret) -->
+            <TextView
+                android:id="@+id/tvFlashSaleOriginalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_2"
+                android:textColor="@color/textPriceStrike"
+                android:textSize="@dimen/text_tiny"
+                tools:text="Rp 199.000" />
+
+            <!-- Progress Stok -->
+            <ProgressBar
+                android:id="@+id/progressFlashSaleStock"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="@dimen/spacing_6"
+                android:max="100"
+                android:progress="30"
+                android:progressDrawable="@drawable/bg_stock_progress"
+                android:progressTint="@color/colorPrimary" />
+
+            <!-- Label Sisa Stok -->
+            <TextView
+                android:id="@+id/tvFlashSaleStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_2"
+                android:textColor="@color/colorError"
+                android:textSize="@dimen/text_tiny"
+                android:textStyle="bold"
+                tools:text="Sisa 30%" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

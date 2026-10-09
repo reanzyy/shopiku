@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <ImageView
+        android:id="@+id/ivCategoryIcon"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_category_icon_v2"
+        android:contentDescription="@string/category_title"
+        android:src="@android:drawable/ic_menu_manage"
+        app:tint="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tvCategoryLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@color/textPrimary"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        tools:text="Elektronik" />
+
+</LinearLayout>

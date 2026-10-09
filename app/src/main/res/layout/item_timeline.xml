@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Kolom Kiri: Lingkaran + Garis -->
+    <LinearLayout
+        android:layout_width="@dimen/spacing_32"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Lingkaran Status -->
+        <View
+            android:id="@+id/viewTimelineCircle"
+            android:layout_width="@dimen/timeline_circle_size"
+            android:layout_height="@dimen/timeline_circle_size"
+            android:background="@drawable/bg_timeline_circle_active" />
+
+        <!-- Garis Penghubung -->
+        <View
+            android:id="@+id/viewTimelineLine"
+            android:layout_width="@dimen/timeline_line_width"
+            android:layout_height="@dimen/timeline_line_height"
+            android:background="@color/timelineActive" />
+
+    </LinearLayout>
+
+    <!-- Kolom Kanan: Konten Status -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_12"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_8">
+
+        <!-- Judul Status -->
+        <TextView
+            android:id="@+id/tvTimelineTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_body"
+            android:textStyle="bold"
+            tools:text="Pesanan Dikirim" />
+
+        <!-- Waktu -->
+        <TextView
+            android:id="@+id/tvTimelineTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_2"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_small"
+            tools:text="09 Okt 2024, 14:30" />
+
+        <!-- Deskripsi -->
+        <TextView
+            android:id="@+id/tvTimelineDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_2"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_small"
+            android:visibility="visible"
+            tools:text="Paket telah diambil oleh kurir J&amp;T di gudang Cirebon"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</LinearLayout>

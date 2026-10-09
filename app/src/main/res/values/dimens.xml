@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- =============================== -->
+    <!--   SHOPIKU - Dimensions          -->
+    <!-- =============================== -->
+
+    <!-- Spacing - Base Unit: 4dp -->
+    <dimen name="spacing_2">2dp</dimen>
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_6">6dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_10">10dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_14">14dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_20">20dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+    <dimen name="spacing_32">32dp</dimen>
+    <dimen name="spacing_40">40dp</dimen>
+    <dimen name="spacing_48">48dp</dimen>
+    <dimen name="spacing_56">56dp</dimen>
+    <dimen name="spacing_64">64dp</dimen>
+    <dimen name="spacing_80">80dp</dimen>
+    <dimen name="spacing_96">96dp</dimen>
+    <dimen name="spacing_120">120dp</dimen>
+
+    <!-- Padding Global -->
+    <dimen name="padding_screen">16dp</dimen>
+    <dimen name="padding_card">12dp</dimen>
+    <dimen name="padding_section">16dp</dimen>
+    <dimen name="padding_item_vertical">8dp</dimen>
+    <dimen name="padding_item_horizontal">12dp</dimen>
+    <dimen name="padding_button">14dp</dimen>
+    <dimen name="padding_chip">8dp</dimen>
+
+    <!-- Margin Global -->
+    <dimen name="margin_screen">16dp</dimen>
+    <dimen name="margin_card">8dp</dimen>
+    <dimen name="margin_section">8dp</dimen>
+    <dimen name="margin_item">6dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="radius_small">4dp</dimen>
+    <dimen name="radius_medium">8dp</dimen>
+    <dimen name="radius_large">12dp</dimen>
+    <dimen name="radius_xlarge">16dp</dimen>
+    <dimen name="radius_xxlarge">20dp</dimen>
+    <dimen name="radius_circle">50dp</dimen>
+    <dimen name="radius_button">8dp</dimen>
+    <dimen name="radius_card">12dp</dimen>
+    <dimen name="radius_badge">4dp</dimen>
+    <dimen name="radius_chip">16dp</dimen>
+    <dimen name="radius_search">24dp</dimen>
+    <dimen name="radius_input">8dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_none">0dp</dimen>
+    <dimen name="elevation_low">2dp</dimen>
+    <dimen name="elevation_card">4dp</dimen>
+    <dimen name="elevation_medium">6dp</dimen>
+    <dimen name="elevation_high">8dp</dimen>
+    <dimen name="elevation_dialog">16dp</dimen>
+    <dimen name="elevation_appbar">4dp</dimen>
+    <dimen name="elevation_bottom_nav">8dp</dimen>
+
+    <!-- Icon Sizes -->
+    <dimen name="icon_size_small">16dp</dimen>
+    <dimen name="icon_size_medium">20dp</dimen>
+    <dimen name="icon_size_normal">24dp</dimen>
+    <dimen name="icon_size_large">32dp</dimen>
+    <dimen name="icon_size_xlarge">48dp</dimen>
+
+    <!-- Avatar / Profile Image -->
+    <dimen name="avatar_small">32dp</dimen>
+    <dimen name="avatar_medium">48dp</dimen>
+    <dimen name="avatar_large">72dp</dimen>
+    <dimen name="avatar_xlarge">96dp</dimen>
+
+    <!-- Logo -->
+    <dimen name="logo_splash">120dp</dimen>
+    <dimen name="logo_auth">64dp</dimen>
+    <dimen name="logo_toolbar">36dp</dimen>
+
+    <!-- AppBar / Toolbar -->
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="search_bar_height">44dp</dimen>
+    <dimen name="bottom_navigation_height">60dp</dimen>
+
+    <!-- Product Card -->
+    <dimen name="product_card_image_height">160dp</dimen>
+    <dimen name="product_card_width">0dp</dimen>
+    <dimen name="product_image_detail_height">280dp</dimen>
+
+    <!-- Banner -->
+    <dimen name="banner_height">180dp</dimen>
+
+    <!-- Category Card -->
+    <dimen name="category_icon_size">48dp</dimen>
+    <dimen name="category_card_size">72dp</dimen>
+
+    <!-- Cart Item -->
+    <dimen name="cart_item_image">80dp</dimen>
+
+    <!-- Review Avatar -->
+    <dimen name="review_avatar">40dp</dimen>
+    <dimen name="review_photo_size">72dp</dimen>
+
+    <!-- Timeline -->
+    <dimen name="timeline_circle_size">16dp</dimen>
+    <dimen name="timeline_line_width">2dp</dimen>
+    <dimen name="timeline_line_height">40dp</dimen>
+
+    <!-- Payment VA Box -->
+    <dimen name="va_box_height">80dp</dimen>
+
+    <!-- Quantity Controller -->
+    <dimen name="qty_btn_size">32dp</dimen>
+    <dimen name="qty_input_width">48dp</dimen>
+
+    <!-- Divider -->
+    <dimen name="divider_thickness">1dp</dimen>
+    <dimen name="section_divider_thickness">8dp</dimen>
+
+    <!-- Badge -->
+    <dimen name="badge_min_size">18dp</dimen>
+    <dimen name="discount_badge_height">20dp</dimen>
+
+    <!-- Font Sizes -->
+    <dimen name="text_tiny">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_medium">15sp</dimen>
+    <dimen name="text_normal">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_xlarge">20sp</dimen>
+    <dimen name="text_xxlarge">24sp</dimen>
+    <dimen name="text_display">28sp</dimen>
+    <dimen name="text_headline">32sp</dimen>
+
+    <!-- Checkout Section -->
+    <dimen name="checkout_bottom_bar_height">80dp</dimen>
+    <dimen name="cart_bottom_bar_height">72dp</dimen>
+
+    <!-- Flash Sale -->
+    <dimen name="flash_sale_item_width">140dp</dimen>
+    <dimen name="flash_sale_item_height">240dp</dimen>
+    <dimen name="flash_sale_image_height">120dp</dimen>
+
+    <!-- Empty State -->
+    <dimen name="empty_icon_size">80dp</dimen>
+    <dimen name="empty_state_margin_top">80dp</dimen>
+
+
+    <!-- SHOPIKU Home - Extra Dimens -->
+    <dimen name="wallet_strip_height">64dp</dimen>
+    <dimen name="wallet_icon_size">36dp</dimen>
+    <dimen name="category_icon_bg_size">52dp</dimen>
+    <dimen name="flash_sale_card_width">148dp</dimen>
+    <dimen name="flash_sale_card_image_height">148dp</dimen>
+    <dimen name="product_grid_image_aspect">1</dimen>
+    <dimen name="badge_height">20dp</dimen>
+    <dimen name="pill_height">32dp</dimen>
+    <dimen name="filter_pill_height">32dp</dimen>
+    <dimen name="countdown_box_min_width">24dp</dimen>
+    <dimen name="nav_item_width">64dp</dimen>
+    <dimen name="nav_home_indicator_width">64dp</dimen>
+    <dimen name="nav_home_indicator_height">32dp</dimen>
+    <dimen name="greeting_avatar_size">36dp</dimen>
+    <dimen name="notification_dot_size">8dp</dimen>
+    <dimen name="load_more_btn_height">48dp</dimen>
+    <dimen name="stock_bar_height">6dp</dimen>
+</resources>

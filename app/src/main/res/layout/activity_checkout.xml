@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.view.CheckoutActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        app:elevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:id="@+id/ivCheckoutBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Kembali"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_media_previous"
+                app:tint="@color/textPrimary" />
+
+            <ImageView
+                android:id="@+id/ivCheckoutLogo"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="Logo"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:id="@+id/tvCheckoutTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:text="Checkout"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivCheckoutShare"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Bagikan"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_share"
+                app:tint="@color/onSurfaceVariant" />
+
+            <ImageView
+                android:id="@+id/ivCheckoutAvatar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:contentDescription="Profil"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="96dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layoutStepIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorSurface"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:elevation="1dp">
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                    <TextView android:layout_width="24dp" android:layout_height="24dp" android:background="@drawable/bg_filter_pill_active" android:gravity="center" android:text="&#10003;" android:textColor="@color/colorPrimary" android:textSize="10sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="Keranjang" android:textColor="@color/onSurfaceVariant" android:textSize="10sp" android:textStyle="bold" />
+                </LinearLayout>
+
+                <View android:layout_width="0dp" android:layout_height="2dp" android:layout_marginHorizontal="8dp" android:layout_weight="1" android:background="@color/colorPrimary" />
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                    <TextView android:layout_width="24dp" android:layout_height="24dp" android:background="@drawable/bg_circle_btn" android:gravity="center" android:text="2" android:textColor="@color/colorOnPrimary" android:textSize="10sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="Checkout" android:textColor="@color/colorPrimary" android:textSize="10sp" android:textStyle="bold" />
+                </LinearLayout>
+
+                <View android:layout_width="0dp" android:layout_height="2dp" android:layout_marginHorizontal="8dp" android:layout_weight="1" android:background="@color/surfaceContainerHighest" />
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                    <TextView android:layout_width="24dp" android:layout_height="24dp" android:background="@drawable/bg_wallet_strip" android:gravity="center" android:text="3" android:textColor="@color/onSurfaceVariant" android:textSize="10sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="Pembayaran" android:textColor="@color/onSurfaceVariant" android:textSize="10sp" android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+                <!-- Shipping Address -->
+                <LinearLayout android:id="@+id/cardShippingAddress" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="14dp">
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Alamat Pengiriman" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_filter_pill_active" android:paddingHorizontal="8dp" android:paddingVertical="2dp" android:text="Utama / Rumah" android:textColor="@color/colorPrimary" android:textSize="10sp" android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:id="@+id/tvReceiverName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Adriansyah Suryawan" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvReceiverPhone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:text="(0812-3456-7890)" android:textColor="@color/textSecondary" android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView android:id="@+id/tvAddress" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:lineSpacingMultiplier="1.4" android:text="Jl. Pemuda No. 42, RT 03 / RW 07, Kel. Sunyaragi, Kec. Kesambi, Kota Cirebon, Jawa Barat 45132" android:textColor="@color/textSecondary" android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton android:id="@+id/btnChangeAddress" style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="wrap_content" android:layout_height="36dp" android:layout_gravity="end" android:layout_marginTop="10dp" android:text="Ubah Alamat" android:textSize="12sp" app:cornerRadius="8dp" app:strokeColor="@color/colorPrimary" />
+                </LinearLayout>
+
+                <!-- Order Items -->
+                <LinearLayout android:id="@+id/cardOrderItems" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="14dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Rincian Produk Pesanan" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2 Produk" android:textColor="@color/onSurfaceVariant" android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <!-- Store 1 -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:background="@color/surfaceContainerLow" android:orientation="vertical" android:padding="12dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#10003;" android:textColor="@color/colorSecondary" android:textSize="14sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tvStore1Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="AudioTech Official Store" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:background="@color/surfaceContainerHighest" android:paddingHorizontal="6dp" android:paddingVertical="2dp" android:text="Kota Jakarta Barat" android:textColor="@color/onSurfaceVariant" android:textSize="9sp" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="top" android:orientation="horizontal">
+                            <ImageView android:id="@+id/ivProduct1" android:layout_width="64dp" android:layout_height="64dp" android:background="@color/surfaceContainerHighest" android:contentDescription="Wireless Earbuds Pro ANC" android:scaleType="centerCrop" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/tvProduct1Name" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:text="Wireless Earbuds Pro ANC" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Warna: Hitam" android:textColor="@color/textSecondary" android:textSize="11sp" />
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:gravity="center_vertical" android:orientation="horizontal">
+                                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="1x Unit" android:textColor="@color/textSecondary" android:textSize="11sp" />
+                                    <TextView android:id="@+id/tvProduct1Price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp249.000" android:textColor="@color/colorPrimary" android:textSize="13sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Store 2 -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:background="@color/surfaceContainerLow" android:orientation="vertical" android:padding="12dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#10003;" android:textColor="@color/colorSecondary" android:textSize="14sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tvStore2Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="Urban Style ID" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:background="@color/surfaceContainerHighest" android:paddingHorizontal="6dp" android:paddingVertical="2dp" android:text="Kota Bandung" android:textColor="@color/onSurfaceVariant" android:textSize="9sp" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="top" android:orientation="horizontal">
+                            <ImageView android:id="@+id/ivProduct2" android:layout_width="64dp" android:layout_height="64dp" android:background="@color/surfaceContainerHighest" android:contentDescription="Tas Ransel Anti Air Laptop 15.6 Inch" android:scaleType="centerCrop" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/tvProduct2Name" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:text="Tas Ransel Anti Air Laptop 15.6 Inch" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Warna: Dark Grey" android:textColor="@color/textSecondary" android:textSize="11sp" />
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:gravity="center_vertical" android:orientation="horizontal">
+                                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="1x Unit" android:textColor="@color/textSecondary" android:textSize="11sp" />
+                                    <TextView android:id="@+id/tvProduct2Price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp175.000" android:textColor="@color/colorPrimary" android:textSize="13sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Shipping Options -->
+                <LinearLayout android:id="@+id/cardShippingOptions" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="14dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Opsi Pengiriman" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tiba Cepat" android:textColor="@color/colorPrimary" android:textSize="11sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <RadioGroup android:id="@+id/radioGroupShipping" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="vertical">
+                        <RadioButton android:id="@+id/rbJntRegular" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="6dp" android:background="@color/primaryFixed" android:checked="true" android:padding="10dp" android:text="J&amp;T Express Regular  \u2014  Rp15.000\nEstimasi: 2 - 3 Hari (Tiba 11 - 12 Okt)" android:textColor="@color/textPrimary" android:textSize="12sp" />
+                        <RadioButton android:id="@+id/rbSiCepatReg" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="6dp" android:background="@color/surfaceContainerLow" android:padding="10dp" android:text="SiCepat REG  \u2014  Rp16.000\nEstimasi: 2 - 4 Hari" android:textColor="@color/textPrimary" android:textSize="12sp" />
+                        <RadioButton android:id="@+id/rbJneYes" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surfaceContainerLow" android:padding="10dp" android:text="JNE YES (Yakin Esok Sampai)  \u2014  Rp28.000\nEstimasi: 1 Hari (Besok Tiba)" android:textColor="@color/textPrimary" android:textSize="12sp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <!-- Payment Method -->
+                <LinearLayout android:id="@+id/cardPaymentMethod" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="14dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Metode Pembayaran" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvTogglePaymentMethod" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="?attr/selectableItemBackgroundBorderless" android:paddingHorizontal="4dp" android:paddingVertical="4dp" android:text="Ubah Metode" android:textColor="@color/colorPrimary" android:textSize="12sp" android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:background="@color/surfaceContainerLow" android:gravity="center_vertical" android:orientation="horizontal" android:padding="12dp">
+                        <TextView android:layout_width="44dp" android:layout_height="44dp" android:background="@color/primaryFixed" android:gravity="center" android:text="BCA" android:textColor="@color/colorPrimary" android:textSize="11sp" android:textStyle="bold" />
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:text="BCA Virtual Account" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Verifikasi Otomatis (Tanpa Bukti Bayar)" android:textColor="@color/textSecondary" android:textSize="11sp" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#10003;" android:textColor="@color/colorPrimary" android:textSize="18sp" android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/layoutPaymentOptions" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="vertical" android:visibility="gone">
+                        <LinearLayout android:id="@+id/itemPayMandiri" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="4dp" android:background="@color/surfaceContainer" android:gravity="center_vertical" android:orientation="horizontal" android:padding="12dp">
+                            <TextView android:layout_width="36dp" android:layout_height="36dp" android:background="@color/surfaceContainerHighest" android:gravity="center" android:text="MDR" android:textColor="@color/textPrimary" android:textSize="9sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:text="Mandiri Virtual Account" android:textColor="@color/textPrimary" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#8250;" android:textColor="@color/onSurfaceVariant" android:textSize="18sp" />
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/itemPayBri" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="4dp" android:background="@color/surfaceContainer" android:gravity="center_vertical" android:orientation="horizontal" android:padding="12dp">
+                            <TextView android:layout_width="36dp" android:layout_height="36dp" android:background="@color/surfaceContainerHighest" android:gravity="center" android:text="BRI" android:textColor="@color/textPrimary" android:textSize="9sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:text="BRIVA (BRI Virtual Account)" android:textColor="@color/textPrimary" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#8250;" android:textColor="@color/onSurfaceVariant" android:textSize="18sp" />
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/itemPayQris" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="4dp" android:background="@color/surfaceContainer" android:gravity="center_vertical" android:orientation="horizontal" android:padding="12dp">
+                            <TextView android:layout_width="36dp" android:layout_height="36dp" android:background="@color/surfaceContainerHighest" android:gravity="center" android:text="QRIS" android:textColor="@color/colorPrimary" android:textSize="9sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:text="QRIS (GoPay / OVO / ShopeePay)" android:textColor="@color/textPrimary" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#8250;" android:textColor="@color/onSurfaceVariant" android:textSize="18sp" />
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/itemPayGerai" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surfaceContainer" android:gravity="center_vertical" android:orientation="horizontal" android:padding="12dp">
+                            <TextView android:layout_width="36dp" android:layout_height="36dp" android:background="@color/surfaceContainerHighest" android:gravity="center" android:text="GERAI" android:textColor="@color/textPrimary" android:textSize="9sp" android:textStyle="bold" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:text="Indomaret / Alfamart" android:textColor="@color/textPrimary" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#8250;" android:textColor="@color/onSurfaceVariant" android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Voucher Section -->
+                <LinearLayout android:id="@+id/cardVoucher" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Voucher &amp; Kode Promo" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:hintEnabled="false">
+                            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etPromoCode" android:layout_width="match_parent" android:layout_height="44dp" android:background="@color/surfaceContainerLow" android:hint="Masukkan kode promo" android:paddingHorizontal="12dp" android:text="HEMAT20K" android:textColor="@color/textPrimary" android:textSize="13sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.button.MaterialButton android:id="@+id/btnApplyPromo" android:layout_width="wrap_content" android:layout_height="44dp" android:layout_marginStart="8dp" android:backgroundTint="@color/colorPrimary" android:text="Terapkan" android:textColor="@color/colorOnPrimary" android:textSize="13sp" android:textStyle="bold" app:cornerRadius="8dp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="horizontal">
+                        <LinearLayout android:id="@+id/badgeHemat20k" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:background="@drawable/bg_filter_pill_active" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="8dp" android:paddingVertical="4dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HEMAT20K (-Rp20.000)" android:textColor="@color/colorPrimary" android:textSize="10sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tvRemoveHemat20k" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:background="?attr/selectableItemBackgroundBorderless" android:text="&#x2715;" android:textColor="@color/colorPrimary" android:textSize="10sp" />
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/badgeGratisOngkir" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_filter_pill_active" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="8dp" android:paddingVertical="4dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GRATISONGKIR (-Rp15.000)" android:textColor="@color/colorPrimary" android:textSize="10sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tvRemoveGratisOngkir" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:background="?attr/selectableItemBackgroundBorderless" android:text="&#x2715;" android:textColor="@color/colorPrimary" android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Price Breakdown -->
+                <LinearLayout android:id="@+id/cardPriceBreakdown" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingBottom="6dp" android:text="Rincian Pembayaran" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Subtotal Produk" android:textColor="@color/textSecondary" android:textSize="13sp" />
+                        <TextView android:id="@+id/tvSubtotalProduct" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp424.000" android:textColor="@color/textPrimary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Total Biaya Pengiriman" android:textColor="@color/textSecondary" android:textSize="13sp" />
+                        <TextView android:id="@+id/tvShippingCost" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp15.000" android:textColor="@color/textPrimary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Diskon Ongkos Kirim" android:textColor="@color/colorSuccess" android:textSize="13sp" />
+                        <TextView android:id="@+id/tvDiscountShipping" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-Rp15.000" android:textColor="@color/colorSuccess" android:textSize="13sp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Diskon Voucher Belanja" android:textColor="@color/colorSuccess" android:textSize="13sp" />
+                        <TextView android:id="@+id/tvDiscountVoucher" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-Rp20.000" android:textColor="@color/colorSuccess" android:textSize="13sp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Biaya Layanan Aplikasi" android:textColor="@color/textSecondary" android:textSize="13sp" />
+                        <TextView android:id="@+id/tvServiceFee" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp1.000" android:textColor="@color/textPrimary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginVertical="10dp" android:background="@color/surfaceContainerHighest" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Total Pembayaran" android:textColor="@color/textPrimary" android:textSize="15sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvGrandTotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp405.000" android:textColor="@color/colorPrimary" android:textSize="18sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:background="@color/surfaceContainerLow" android:gravity="center_vertical" android:orientation="horizontal" android:padding="10dp">
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:lineSpacingMultiplier="1.3" android:text="Transaksi Anda dilindungi Garansi Perlindungan Konsumen SHOPIKU." android:textColor="@color/onSurfaceVariant" android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Bar -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:background="@color/colorSurface" android:elevation="12dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp" android:paddingVertical="12dp">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Tagihan" android:textColor="@color/textSecondary" android:textSize="11sp" />
+            <TextView android:id="@+id/tvBottomTotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rp405.000" android:textColor="@color/colorPrimary" android:textSize="18sp" android:textStyle="bold" />
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnPlaceOrder" android:layout_width="wrap_content" android:layout_height="48dp" android:backgroundTint="@color/colorPrimary" android:minWidth="160dp" android:text="Buat Pesanan" android:textColor="@color/colorOnPrimary" android:textSize="14sp" android:textStyle="bold" app:cornerRadius="12dp" app:icon="@android:drawable/ic_lock_lock" app:iconGravity="end" app:iconTint="@color/colorOnPrimary" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
