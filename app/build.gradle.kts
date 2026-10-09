@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -58,4 +59,10 @@ dependencies {
     // Image Loader
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("io.coil-kt:coil:2.6.0")
+
+    // Supabase & Ktor
+    implementation(platform(libs.supabase.bom))
+    implementation(libs.supabase.postgrest)
+    implementation(libs.ktor.client.android)
+    implementation(libs.kotlinx.serialization.json)
 }
