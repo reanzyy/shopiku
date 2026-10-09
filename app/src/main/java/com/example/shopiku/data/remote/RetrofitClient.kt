@@ -16,6 +16,8 @@ object RetrofitClient {
             val request = original.newBuilder()
                 .header("apikey", SUPABASE_KEY)
                 .header("Authorization", "Bearer $SUPABASE_KEY")
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
                 .build()
             chain.proceed(request)
         }
@@ -31,5 +33,23 @@ object RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ShopeeApiService::class.java)
+    }
+
+    val productApiService: ProductApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ProductApiService::class.java)
+    }
+
+    val cartApiService: CartApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CartApiService::class.java)
     }
 }

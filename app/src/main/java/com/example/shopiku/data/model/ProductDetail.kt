@@ -7,14 +7,10 @@ import java.text.NumberFormat
 import java.util.Locale
 
 @Serializable
-data class CartItem(
+data class ProductDetail(
     @SerialName("id")
     @SerializedName("id")
-    val id: String? = null,
-
-    @SerialName("productId")
-    @SerializedName("productId")
-    val productId: String,
+    val id: Long,
 
     @SerialName("name")
     @SerializedName("name")
@@ -24,13 +20,21 @@ data class CartItem(
     @SerializedName("price")
     val price: Double,
 
-    @SerialName("quantity")
-    @SerializedName("quantity")
-    var quantity: Int,
+    @SerialName("rating")
+    @SerializedName("rating")
+    val rating: Double? = null,
+
+    @SerialName("description")
+    @SerializedName("description")
+    val description: String? = null,
 
     @SerialName("imageUrl")
-    @SerializedName("imageUrl")
-    val imageUrl: String
+    @SerializedName("imageUrl", alternate = ["image_url"])
+    val imageUrl: String? = null,
+
+    @SerialName("category")
+    @SerializedName("category")
+    val category: String? = null
 ) {
     fun getFormattedPrice(): String {
         return try {
@@ -40,19 +44,6 @@ data class CartItem(
             numberFormat.format(price)
         } catch (e: Exception) {
             "Rp${price.toLong()}"
-        }
-    }
-
-    fun getTotalPrice(): Double = price * quantity
-
-    fun getFormattedTotalPrice(): String {
-        return try {
-            val localeID = Locale("in", "ID")
-            val numberFormat = NumberFormat.getCurrencyInstance(localeID)
-            numberFormat.maximumFractionDigits = 0
-            numberFormat.format(getTotalPrice())
-        } catch (e: Exception) {
-            "Rp${getTotalPrice().toLong()}"
         }
     }
 }

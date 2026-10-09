@@ -39,25 +39,78 @@
                     android:src="@drawable/ic_share"
                     app:tint="@color/textPrimary" />
 
-                <ImageView
-                    android:id="@+id/ivProfileAvatar"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_circle_btn"
-                    android:scaleType="centerCrop" />
-
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- ===== SCROLLABLE CONTENT ===== -->
-    <androidx.core.widget.NestedScrollView
+    <!-- ===== LOADING STATE ===== -->
+    <FrameLayout
+        android:id="@+id/layoutLoading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="80dp"
+        android:background="@color/colorBackground"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:indeterminateTint="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Memuat detail produk..."
+                android:textColor="@color/textSecondary"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- ===== ERROR STATE ===== -->
+    <LinearLayout
+        android:id="@+id/layoutError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Gagal memuat detail produk."
+            android:textColor="@color/textPrimary"
+            android:textSize="15sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRetry"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Coba Lagi" />
+    </LinearLayout>
+
+    <!-- ===== SCROLLABLE CONTENT ===== -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:paddingBottom="80dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -65,16 +118,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- ===== SECTION 1 : IMAGE GALLERY ===== -->
+            <!-- ===== SECTION 1 : PRODUCT IMAGE ===== -->
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="320dp"
                 android:background="@color/surfaceContainerLow">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPagerProduct"
+                <ImageView
+                    android:id="@+id/ivProductImage"
                     android:layout_width="match_parent"
-                    android:layout_height="320dp" />
+                    android:layout_height="match_parent"
+                    android:contentDescription="Gambar produk"
+                    android:scaleType="centerCrop"
+                    tools:src="@mipmap/ic_launcher" />
 
                 <View
                     android:layout_width="match_parent"
@@ -82,69 +138,27 @@
                     android:layout_gravity="bottom"
                     android:background="@drawable/bg_gradient_scrim_bottom" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvCategoryBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|start"
                     android:layout_margin="12dp"
                     android:background="@drawable/bg_flash_sale_badge"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#x1F525; TERLARIS"
-                        android:textColor="@color/colorOnPrimary"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/btnWishlistGallery"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="top|end"
-                    android:layout_margin="12dp"
-                    android:background="@drawable/bg_circle_btn"
-                    android:contentDescription="Wishlist"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_favorite_filled"
-                    app:tint="@color/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/tvImageCounter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="12dp"
-                    android:background="@drawable/bg_countdown_digit"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
-                    android:textColor="@color/inverseOnSurface"
+                    android:paddingVertical="5dp"
+                    android:textColor="@color/colorOnPrimary"
                     android:textSize="11sp"
-                    tools:text="1 / 5" />
+                    android:textStyle="bold"
+                    tools:text="Elektronik" />
 
             </FrameLayout>
 
-            <!-- Thumbnail row -->
-            <HorizontalScrollView
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/surfaceContainerLowest"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="10dp"
-                android:scrollbars="none">
-                <LinearLayout
-                    android:id="@+id/llThumbnails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
+                android:layout_height="8dp"
+                android:background="@color/surfaceContainerLow" />
 
-            <View android:layout_width="match_parent" android:layout_height="8dp" android:background="@color/surfaceContainerLow" />
             <!-- ===== SECTION 2 : PRICE AND PRODUCT INFO ===== -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -167,70 +181,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        tools:text="Rp249.000" />
-
-                    <TextView
-                        android:id="@+id/tvOriginalPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="13sp"
-                        tools:text="Rp399.000" />
-
-                    <TextView
-                        android:id="@+id/tvDiscountBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:background="@drawable/bg_discount_badge_pill"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="3dp"
-                        android:textColor="@color/discountBadgeText"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        tools:text="-38%" />
-
-                </LinearLayout>
-
-                <!-- Trust badges -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_filter_pill_inactive"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="4dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="&#x2713; SHOPIKU Mall Resmi"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:text="&#8226;"
-                        android:textColor="@color/textSecondary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#x1F6E1; 100% Original"
-                        android:textColor="@color/onSurfaceVariant"
-                        android:textSize="11sp" />
+                        tools:text="Rp150.000" />
 
                 </LinearLayout>
 
@@ -244,9 +195,9 @@
                     android:textColor="@color/textPrimary"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    tools:text="Wireless Earbuds Pro ANC Hi-Fi Audio Bluetooth 5.3 Waterproof IPX5" />
+                    tools:text="Nama Produk" />
 
-                <!-- Rating and social proof -->
+                <!-- Rating -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -259,55 +210,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorAmber"
-                        android:textSize="13sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
-                        tools:text="&#9733; 4.8" />
+                        tools:text="★ 4.8" />
 
                     <TextView
                         android:id="@+id/tvRatingCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="6dp"
                         android:textColor="@color/textSecondary"
-                        android:textSize="12sp"
-                        tools:text="(124 ulasan)" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:text="&#8226;"
-                        android:textColor="@color/outlineVariant" />
-
-                    <TextView
-                        android:id="@+id/tvSold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="12sp"
-                        tools:text="1.2rb+ terjual" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:text="&#8226;"
-                        android:textColor="@color/outlineVariant" />
-
-                    <TextView
-                        android:id="@+id/tvSatisfaction"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="12sp"
-                        tools:text="&#x1F44D; 98% puas" />
+                        android:textSize="13sp"
+                        tools:text="(0 ulasan)" />
 
                 </LinearLayout>
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="8dp" android:background="@color/surfaceContainerLow" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/surfaceContainerLow" />
 
-            <!-- ===== SECTION 3 : VARIANT SELECTION ===== -->
+            <!-- ===== SECTION 3 : QUANTITY SELECTION ===== -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -315,150 +239,20 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Header -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pilih Varian"
+                        android:text="Jumlah Pembelian"
                         android:textColor="@color/textPrimary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/tvResetVariant"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Reset"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Color label -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Warna:"
-                    android:textColor="@color/onSurfaceVariant"
-                    android:textSize="12sp" />
-                <TextView
-                    android:id="@+id/tvSelectedColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    tools:text="Hitam" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupColor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:singleSelection="true"
-                    app:selectionRequired="true">
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Hitam" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Putih" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Biru Navy" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <!-- Size label -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Ukuran Eartips:"
-                    android:textColor="@color/onSurfaceVariant"
-                    android:textSize="12sp" />
-                <TextView
-                    android:id="@+id/tvSelectedSize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    tools:text="Standar (S, M, L)" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:singleSelection="true"
-                    app:selectionRequired="true">
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Standar (S, M, L)" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Memory Foam Pack" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <!-- Quantity stepper -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Jumlah Pembelian"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tersisa "
-                                android:textColor="@color/textSecondary"
-                                android:textSize="12sp" />
-                            <TextView
-                                android:id="@+id/tvStock"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-                                tools:text="42 buah" />
-                        </LinearLayout>
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -467,6 +261,7 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="4dp">
+
                         <ImageButton
                             android:id="@+id/btnQtyMinus"
                             android:layout_width="40dp"
@@ -475,6 +270,7 @@
                             android:contentDescription="Kurangi"
                             android:src="@drawable/ic_remove"
                             app:tint="@color/textPrimary" />
+
                         <TextView
                             android:id="@+id/tvQuantity"
                             android:layout_width="40dp"
@@ -484,6 +280,7 @@
                             android:textColor="@color/textPrimary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
+
                         <ImageButton
                             android:id="@+id/btnQtyPlus"
                             android:layout_width="40dp"
@@ -496,280 +293,12 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="8dp" android:background="@color/surfaceContainerLow" />
-            <!-- ===== SECTION 4 : SHIPPING ===== -->
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/surfaceContainerLowest"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="8dp"
+                android:background="@color/surfaceContainerLow" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Pengiriman &amp; Ongkos Kirim"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/tvCekEstimasi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cek Estimasi"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/bg_filter_pill_inactive"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-
-                    <!-- Origin and ETA -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="top"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/bg_category_icon_v2"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_shipping"
-                            app:tint="@color/colorPrimary"
-                            android:contentDescription="Pengiriman" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Pengiriman dari Cirebon"
-                                    android:textColor="@color/textPrimary"
-                                    android:textSize="13sp"
-                                    android:textStyle="bold" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="6dp"
-                                    android:background="@drawable/bg_filter_pill_inactive"
-                                    android:paddingHorizontal="6dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="Reguler"
-                                    android:textColor="@color/textSecondary"
-                                    android:textSize="11sp" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Estimasi tiba: 2 - 4 hari ke alamat Anda"
-                                android:textColor="@color/textSecondary"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- Shipping cost -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Ongkos Kirim:"
-                            android:textColor="@color/textSecondary"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp15.000"
-                            android:textColor="@color/textSecondary"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="Gratis (Rp0)"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/bg_discount_badge_pill"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="3dp"
-                            android:text="Voucher Auto"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <!-- Guarantee pill -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/colorSurface"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="8dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="&#x1F6E1; "
-                            android:textSize="13sp" />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Garansi Tepat Waktu atau Kompensasi Koin SHOPIKU Belanja"
-                            android:textColor="@color/onSurfaceVariant"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <View android:layout_width="match_parent" android:layout_height="8dp" android:background="@color/surfaceContainerLow" />
-
-            <!-- ===== SECTION 5 : SELLER CARD ===== -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/surfaceContainerLowest"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <FrameLayout
-                        android:layout_width="48dp"
-                        android:layout_height="48dp">
-                        <ImageView
-                            android:id="@+id/ivStoreAvatar"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/bg_circle_btn"
-                            android:scaleType="centerCrop"
-                            android:contentDescription="Logo toko" />
-                        <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
-                            android:layout_gravity="bottom|end"
-                            android:background="@color/colorPrimary"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_check"
-                            app:tint="@color/colorOnPrimary"
-                            android:contentDescription="Verified" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:id="@+id/tvStoreName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/textPrimary"
-                                android:textSize="14sp"
-                                android:textStyle="bold"
-                                tools:text="AudioTech Official Store" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="6dp"
-                                android:background="@drawable/bg_discount_badge_pill"
-                                android:paddingHorizontal="6dp"
-                                android:paddingVertical="2dp"
-                                android:text="Official"
-                                android:textColor="@color/textPrimary"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tvStoreStats"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:textColor="@color/textSecondary"
-                            android:textSize="12sp"
-                            tools:text="&#9733; 4.9 - 48rb Pengikut - Online 5 mnt lalu" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal">
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnChatSeller"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:text="Chat Penjual"
-                        android:textSize="13sp" />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnVisitStore"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/primaryFixed"
-                        android:text="Kunjungi Toko"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="13sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <View android:layout_width="match_parent" android:layout_height="8dp" android:background="@color/surfaceContainerLow" />
-            <!-- ===== SECTION 6 : DESCRIPTION AND SPECS ===== -->
+            <!-- ===== SECTION 4 : DESCRIPTION ===== -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -793,101 +322,16 @@
                     android:lineSpacingExtra="3dp"
                     android:textColor="@color/textSecondary"
                     android:textSize="14sp"
-                    tools:text="Rasakan pengalaman audio nirkabel memukau dengan Wireless Earbuds Pro ANC. Dilengkapi chip pintar Bluetooth 5.3 generasi terbaru yang menghadirkan koneksi stabil, transmisi latensi sangat rendah, dan peredam kebisingan aktif adaptif." />
+                    tools:text="Deskripsi produk akan ditampilkan di sini." />
 
-                <!-- Key highlights 2-column grid -->
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:columnCount="2"
-                    android:rowCount="2"
-                    android:useDefaultMargins="false">
-
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@color/surfaceContainerLow" android:gravity="center_vertical" android:orientation="horizontal" android:padding="10dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#x1F507;" android:textSize="18sp" />
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ANC Hingga" android:textColor="@color/textSecondary" android:textSize="10sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="35dB Hybrid" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@color/surfaceContainerLow" android:gravity="center_vertical" android:orientation="horizontal" android:padding="10dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#x1F50B;" android:textSize="18sp" />
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Playtime" android:textColor="@color/textSecondary" android:textSize="10sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="32 Jam Total" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@color/surfaceContainerLow" android:gravity="center_vertical" android:orientation="horizontal" android:padding="10dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#x1F3AE;" android:textSize="18sp" />
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gaming Mode" android:textColor="@color/textSecondary" android:textSize="10sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="45ms Low Latency" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@color/surfaceContainerLow" android:gravity="center_vertical" android:orientation="horizontal" android:padding="10dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&#x1F4A7;" android:textSize="18sp" />
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ketahanan" android:textColor="@color/textSecondary" android:textSize="10sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Waterproof IPX5" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </GridLayout>
-
-                <!-- Specs table -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Spesifikasi Lengkap"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surfaceContainerLowest" android:paddingHorizontal="14dp" android:paddingVertical="10dp">
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Konektivitas" android:textColor="@color/textSecondary" android:textSize="13sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bluetooth 5.3 + EDR" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
-                    </LinearLayout>
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/surfaceContainerLow" />
-
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surfaceContainerLow" android:paddingHorizontal="14dp" android:paddingVertical="10dp">
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Port Pengisian Daya" android:textColor="@color/textSecondary" android:textSize="13sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="USB Type-C Fast Charge" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
-                    </LinearLayout>
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/surfaceContainerLow" />
-
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surfaceContainerLowest" android:paddingHorizontal="14dp" android:paddingVertical="10dp">
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Kapasitas Baterai" android:textColor="@color/textSecondary" android:textSize="13sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="400mAh Case / 45mAh Buds" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
-                    </LinearLayout>
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/surfaceContainerLow" />
-
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surfaceContainerLow" android:paddingHorizontal="14dp" android:paddingVertical="10dp">
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Jarak Transmisi" android:textColor="@color/textSecondary" android:textSize="13sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10 - 15 Meter" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold" />
-                    </LinearLayout>
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/surfaceContainerLow" />
-
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surfaceContainerLowest" android:paddingHorizontal="14dp" android:paddingVertical="10dp">
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Masa Garansi" android:textColor="@color/textSecondary" android:textSize="13sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12 Bulan Distributor Resmi RI" android:textColor="@color/colorPrimary" android:textSize="13sp" android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="8dp" android:background="@color/surfaceContainerLow" />
-            <!-- ===== SECTION 7 : CUSTOMER REVIEWS ===== -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/surfaceContainerLow" />
+
+            <!-- ===== SECTION 5 : REVIEWS ===== -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -895,205 +339,60 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Reviews header -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="&#9733;"
-                            android:textColor="@color/colorAmber"
-                            android:textSize="18sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="4.8 / 5.0"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="(124 Ulasan)"
-                            android:textColor="@color/textSecondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:text="Ulasan Pembeli"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvSeeAllReviews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lihat Semua &#x203A;"
+                        android:text="Lihat Semua ›"
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
-                <!-- Review Card 1 -->
-                <LinearLayout
+                <ProgressBar
+                    android:id="@+id/pbReviews"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvNoReviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:background="@color/surfaceContainerLow"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:text="Belum ada ulasan untuk produk ini."
+                    android:textColor="@color/textSecondary"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@color/primaryFixed"
-                            android:gravity="center"
-                            android:text="BP"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Budi Pratama"
-                                android:textColor="@color/textPrimary"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Varian: Hitam - 2 hari lalu"
-                                android:textColor="@color/textSecondary"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="&#9733;&#9733;&#9733;&#9733;&#9733;"
-                            android:textColor="@color/colorAmber"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:lineSpacingExtra="2dp"
-                        android:text="&quot;Bass mantap dan bulat, ANC bekerja sangat baik saat saya uji di KRL dan kafe ramai. Pengiriman super cepat ke Cirebon hanya 1 hari sampai!&quot;"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="13sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:id="@+id/ivReview1Photo1"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
-                            android:background="@color/surfaceContainerLowest"
-                            android:contentDescription="Foto ulasan"
-                            android:scaleType="centerCrop" />
-                        <ImageView
-                            android:id="@+id/ivReview1Photo2"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
-                            android:layout_marginStart="8dp"
-                            android:background="@color/surfaceContainerLowest"
-                            android:contentDescription="Foto ulasan"
-                            android:scaleType="centerCrop" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- Review Card 2 -->
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvReviewsPreview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/surfaceContainerLow"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:layout_marginTop="12dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_product_review" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@color/secondaryFixed"
-                            android:gravity="center"
-                            android:text="SR"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Siti Rahmawati"
-                                android:textColor="@color/textPrimary"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Varian: Hitam - 5 hari lalu"
-                                android:textColor="@color/textSecondary"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="&#9733;&#9733;&#9733;&#9733;&#9733;"
-                            android:textColor="@color/colorAmber"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:lineSpacingExtra="2dp"
-                        android:text="&quot;Barang original 100%, segel aman. Pairing ke smartphone sangat cepat tanpa kendala dan baterai awet tahan 3 hari untuk pemakaian harian.&quot;"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -1118,12 +417,14 @@
             android:background="@color/surfaceContainerLow"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="Chat"
                 android:src="@drawable/ic_chat"
-                app:tint="@color/onSurfaceVariant"
-                android:contentDescription="Chat" />
+                app:tint="@color/onSurfaceVariant" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -1132,38 +433,28 @@
                 android:textSize="10sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btnWishlistBar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="6dp"
-            android:background="@color/surfaceContainerLow"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/ivWishlistBarIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_favorite_filled"
-                app:tint="@color/colorPrimary"
-                android:contentDescription="Favorit" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Favorit"
-                android:textColor="@color/onSurfaceVariant"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddToCart"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="+ Keranjang"
-            android:textSize="13sp" />
+            android:layout_weight="1">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddToCart"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="+ Keranjang"
+                android:textSize="13sp" />
+
+            <ProgressBar
+                android:id="@+id/pbAddToCart"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorPrimary"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBuyNow"

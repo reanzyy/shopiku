@@ -1,7 +1,11 @@
 package com.example.shopiku.data.repository
 
 import com.example.shopiku.data.common.UiState
+import com.example.shopiku.data.model.AddToCartRequest
 import com.example.shopiku.data.model.Product
+import com.example.shopiku.data.model.ProductDetail
+import com.example.shopiku.data.model.Review
+import com.example.shopiku.data.remote.ProductApiService
 import com.example.shopiku.data.remote.RetrofitClient
 import com.example.shopiku.data.remote.ShopeeApiService
 import com.example.shopiku.data.remote.SupabaseClient
@@ -12,7 +16,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class ProductRepository(
-    private val apiService: ShopeeApiService = RetrofitClient.apiService
+    private val apiService: ShopeeApiService = RetrofitClient.apiService,
+    private val productApiService: ProductApiService = RetrofitClient.productApiService
 ) {
     fun getProducts(
         searchName: String? = null,
@@ -86,6 +91,76 @@ class ProductRepository(
             }
         } catch (e: Exception) {
             emit(UiState.Error("Gagal terhubung ke server: ${e.localizedMessage ?: "Koneksi bermasalah"}"))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    fun getProductDetailById(productId: Long): Flow<UiState<ProductDetail>> = flow {
+        emit(UiState.Loading)
+        try {
+            val response = productApiService.getProductDetail("eq.$productId")
+            val detailList = response.body()
+            val detail = detailList?.firstOrNull() ?: try {
+                SupabaseClient.client.from("products")
+                    .select {
+                        filter {
+                            eq("id", productId)
+                        }
+                    }.decodeSingleOrNull<ProductDetail>()
+            } catch (e: Exception) {
+                null
+            }
+
+            if (detail != null) {
+                emit(UiState.Success(detail))
+            } else {
+                emit(UiState.Error("Detail produk tidak ditemukan"))
+            }
+        } catch (e: Exception) {
+            emit(UiState.Error("Gagal terhubung ke server: ${e.localizedMessage ?: "Koneksi bermasalah"}"))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    fun getProductReviews(productId: Long): Flow<UiState<List<Review>>> = flow {
+        emit(UiState.Loading)
+        try {
+            val response = productApiService.getProductReviews("eq.$productId")
+            val reviews = if (response.isSuccessful) {
+                response.body() ?: emptyList()
+            } else {
+                try {
+                    SupabaseClient.client.from("reviews")
+                        .select {
+                            filter {
+                                eq("product_id", productId)
+                            }
+                        }.decodeList<Review>()
+                } catch (e: Exception) {
+                    emptyList()
+                }
+            }
+
+            if (reviews.isEmpty()) {
+                emit(UiState.Empty)
+            } else {
+                emit(UiState.Success(reviews))
+            }
+        } catch (e: Exception) {
+            emit(UiState.Error("Gagal memuat ulasan: ${e.localizedMessage ?: "Koneksi bermasalah"}"))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    fun addToCart(productId: Long, quantity: Int): Flow<UiState<Unit>> = flow {
+        emit(UiState.Loading)
+        try {
+            val request = AddToCartRequest(product_id = productId, quantity = quantity)
+            val response = productApiService.addToCart(request)
+            if (response.isSuccessful) {
+                emit(UiState.Success(Unit))
+            } else {
+                emit(UiState.Error("Gagal menambahkan produk ke keranjang (${response.code()})"))
+            }
+        } catch (e: Exception) {
+            emit(UiState.Error("Terjadi kesalahan koneksi: ${e.localizedMessage ?: "Gagal terhubung ke server"}"))
         }
     }.flowOn(Dispatchers.IO)
 }
