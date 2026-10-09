@@ -6,10 +6,19 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    // Ganti dengan URL MockAPI / Supabase / Express backend Anda
-    private const val BASE_URL = "https://6ac7dada75a4ce3fe7224f83.mockapi.io/api/v1/"
+    // URL Supabase Postgrest REST API
+    private const val BASE_URL = "https://xmlzyswyxiqwmunypgrt.supabase.co/rest/v1/"
+    private const val SUPABASE_KEY = "sb_publishable_KqKpIj7K6luVc6Z2ngMFOg_z8iTdRyC"
 
     private val client = OkHttpClient.Builder()
+        .addInterceptor { chain ->
+            val original = chain.request()
+            val request = original.newBuilder()
+                .header("apikey", SUPABASE_KEY)
+                .header("Authorization", "Bearer $SUPABASE_KEY")
+                .build()
+            chain.proceed(request)
+        }
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
