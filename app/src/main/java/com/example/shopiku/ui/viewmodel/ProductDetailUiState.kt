@@ -15,6 +15,7 @@ data class ProductDetailUiState(
     // Variant State
     val variants: List<ProductVariant> = emptyList(),
     val isVariantsLoading: Boolean = false,
+    val variantsErrorMessage: String? = null,
     val availableColors: List<String> = emptyList(),
     val availableSizes: List<String> = emptyList(),
     val selectedColor: String? = null,
@@ -45,5 +46,23 @@ data class ProductDetailUiState(
         } catch (e: Exception) {
             "Rp${finalPrice.toLong()}"
         }
+    }
+
+    /** Sizes that exist for the currently selected color (or all sizes if no color filter). */
+    fun sizesForSelectedColor(): List<String> {
+        if (selectedColor.isNullOrBlank()) return availableSizes
+        return variants
+            .filter { it.color.equals(selectedColor, ignoreCase = true) }
+            .mapNotNull { it.size?.takeIf { s -> s.isNotBlank() } }
+            .distinct()
+    }
+
+    /** Colors that exist for the currently selected size (or all colors if no size filter). */
+    fun colorsForSelectedSize(): List<String> {
+        if (selectedSize.isNullOrBlank()) return availableColors
+        return variants
+            .filter { it.size.equals(selectedSize, ignoreCase = true) }
+            .mapNotNull { it.color?.takeIf { c -> c.isNotBlank() } }
+            .distinct()
     }
 }

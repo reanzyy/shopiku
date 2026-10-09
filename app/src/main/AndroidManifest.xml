@@ -28,7 +28,13 @@
         <activity android:name=".ui.view.CategoriesActivity" android:exported="false" />
         <activity android:name=".ui.view.CheckoutActivity" android:exported="false" />
         <activity android:name=".ui.view.LoginActivity" android:exported="false" />
-        <activity android:name=".ui.view.PaymentActivity" android:exported="false" />
+        <activity
+            android:name=".ui.view.PaymentActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <activity android:name=".ui.view.PaymentSuccessActivity" android:exported="false" />
+        <activity android:name=".ui.view.PaymentPendingActivity" android:exported="false" />
+        <activity android:name=".ui.view.PaymentExpiredActivity" android:exported="false" />
         <activity android:name=".ui.view.ProductDetailActivity" android:exported="false" />
         <activity android:name=".ui.view.ProductsActivity" android:exported="false" />
         <activity android:name=".ui.view.ProfileActivity" android:exported="false" />

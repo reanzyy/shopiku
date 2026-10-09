@@ -91,34 +91,89 @@ class ProductDetailViewModel(
 
     private fun fetchVariants(productId: Long) {
         viewModelScope.launch {
-            _uiState.update { it.copy(isVariantsLoading = true) }
+            _uiState.update {
+                it.copy(
+                    isVariantsLoading = true,
+                    variantsErrorMessage = null
+                )
+            }
 
             variantRepository.getProductVariants(productId).collect { variantState ->
-                if (variantState is UiState.Success) {
-                    val variantList = variantState.data.filter { it.isActive }
-
-                    val colors = variantList.mapNotNull { it.color }.distinct()
-                    val sizes = variantList.mapNotNull { it.size }.distinct()
-
-                    val defaultColor = colors.firstOrNull()
-                    val defaultSize = sizes.firstOrNull()
-
-                    _uiState.update { currentState ->
-                        currentState.copy(
-                            isVariantsLoading = false,
-                            variants = variantList,
-                            availableColors = colors,
-                            availableSizes = sizes,
-                            selectedColor = defaultColor,
-                            selectedSize = defaultSize
-                        )
+                when (variantState) {
+                    is UiState.Loading -> {
+                        _uiState.update {
+                            it.copy(isVariantsLoading = true, variantsErrorMessage = null)
+                        }
                     }
-                    recalculateVariantSelection()
-                } else {
-                    _uiState.update { it.copy(isVariantsLoading = false) }
+                    is UiState.Success -> {
+                        applyVariantList(variantState.data)
+                    }
+                    is UiState.Empty -> {
+                        _uiState.update {
+                            it.copy(
+                                isVariantsLoading = false,
+                                variantsErrorMessage = null,
+                                variants = emptyList(),
+                                availableColors = emptyList(),
+                                availableSizes = emptyList(),
+                                selectedColor = null,
+                                selectedSize = null,
+                                selectedVariant = null,
+                                variantSelectionInstruction = null,
+                                isVariantSelectionValid = true
+                            )
+                        }
+                        recalculateVariantSelection()
+                    }
+                    is UiState.Error -> {
+                        _uiState.update {
+                            it.copy(
+                                isVariantsLoading = false,
+                                variantsErrorMessage = variantState.message,
+                                variants = emptyList(),
+                                availableColors = emptyList(),
+                                availableSizes = emptyList(),
+                                selectedColor = null,
+                                selectedSize = null,
+                                selectedVariant = null,
+                                isVariantSelectionValid = false,
+                                variantSelectionInstruction = null
+                            )
+                        }
+                    }
                 }
             }
         }
+    }
+
+    private fun applyVariantList(variantList: List<ProductVariant>) {
+        val active = variantList.filter { it.isActive }
+        val colors = active.mapNotNull { it.color?.takeIf { c -> c.isNotBlank() } }.distinct()
+        val sizes = active.mapNotNull { it.size?.takeIf { s -> s.isNotBlank() } }.distinct()
+
+        val first = active.firstOrNull()
+        val defaultColor = first?.color?.takeIf { it.isNotBlank() } ?: colors.firstOrNull()
+        val defaultSize = when {
+            defaultColor != null -> {
+                active.filter { it.color.equals(defaultColor, ignoreCase = true) }
+                    .mapNotNull { it.size?.takeIf { s -> s.isNotBlank() } }
+                    .firstOrNull()
+            }
+            else -> sizes.firstOrNull()
+        }
+
+        _uiState.update { currentState ->
+            currentState.copy(
+                isVariantsLoading = false,
+                variantsErrorMessage = null,
+                variants = active,
+                availableColors = colors,
+                availableSizes = sizes,
+                selectedColor = defaultColor,
+                selectedSize = defaultSize
+            )
+        }
+        recalculateVariantSelection()
     }
 
     private fun fetchReviews(productId: Long) {
@@ -156,14 +211,17 @@ class ProductDetailViewModel(
     fun selectColor(color: String) {
         val currentState = _uiState.value
         val variantList = currentState.variants
-        val sizesForColor = variantList.filter { it.color.equals(color, ignoreCase = true) }
-            .mapNotNull { it.size }
+        val sizesForColor = variantList
+            .filter { it.color.equals(color, ignoreCase = true) }
+            .mapNotNull { it.size?.takeIf { s -> s.isNotBlank() } }
             .distinct()
 
-        val newSize = if (sizesForColor.contains(currentState.selectedSize)) {
-            currentState.selectedSize
-        } else {
-            sizesForColor.firstOrNull()
+        val newSize = when {
+            sizesForColor.isEmpty() -> null
+            currentState.selectedSize != null &&
+                sizesForColor.any { it.equals(currentState.selectedSize, ignoreCase = true) } ->
+                currentState.selectedSize
+            else -> sizesForColor.firstOrNull()
         }
 
         _uiState.update {
@@ -178,14 +236,17 @@ class ProductDetailViewModel(
     fun selectSize(size: String) {
         val currentState = _uiState.value
         val variantList = currentState.variants
-        val colorsForSize = variantList.filter { it.size.equals(size, ignoreCase = true) }
-            .mapNotNull { it.color }
+        val colorsForSize = variantList
+            .filter { it.size.equals(size, ignoreCase = true) }
+            .mapNotNull { it.color?.takeIf { c -> c.isNotBlank() } }
             .distinct()
 
-        val newColor = if (colorsForSize.contains(currentState.selectedColor)) {
-            currentState.selectedColor
-        } else {
-            colorsForSize.firstOrNull()
+        val newColor = when {
+            colorsForSize.isEmpty() -> currentState.selectedColor
+            currentState.selectedColor != null &&
+                colorsForSize.any { it.equals(currentState.selectedColor, ignoreCase = true) } ->
+                currentState.selectedColor
+            else -> colorsForSize.firstOrNull() ?: currentState.selectedColor
         }
 
         _uiState.update {
@@ -208,8 +269,8 @@ class ProductDetailViewModel(
                 it.copy(
                     selectedVariant = null,
                     finalPrice = basePrice,
-                    stock = 50,
-                    isVariantSelectionValid = true,
+                    stock = 0,
+                    isVariantSelectionValid = currentState.variantsErrorMessage == null,
                     variantSelectionInstruction = null
                 )
             }
@@ -218,14 +279,41 @@ class ProductDetailViewModel(
 
         val color = currentState.selectedColor
         val size = currentState.selectedSize
+        val hasColors = currentState.availableColors.isNotEmpty()
+        val hasSizes = currentState.availableSizes.isNotEmpty()
 
-        // Cari varian yang cocok dengan warna dan ukuran terpilih
+        if (hasColors && color.isNullOrBlank()) {
+            _uiState.update {
+                it.copy(
+                    selectedVariant = null,
+                    finalPrice = basePrice,
+                    stock = 0,
+                    isVariantSelectionValid = false,
+                    variantSelectionInstruction = "Silakan pilih warna."
+                )
+            }
+            return
+        }
+
+        if (hasSizes && size.isNullOrBlank()) {
+            _uiState.update {
+                it.copy(
+                    selectedVariant = null,
+                    finalPrice = basePrice,
+                    stock = 0,
+                    isVariantSelectionValid = false,
+                    variantSelectionInstruction = "Silakan pilih ukuran."
+                )
+            }
+            return
+        }
+
+        // Exact combination match only — no fallback to unrelated variants
         val matchedVariant = variantList.find { v ->
-            (color == null || v.color.equals(color, ignoreCase = true)) &&
-            (size == null || v.size.equals(size, ignoreCase = true))
-        } ?: variantList.find { v ->
-            color != null && v.color.equals(color, ignoreCase = true)
-        } ?: variantList.firstOrNull()
+            val colorOk = !hasColors || v.color.equals(color, ignoreCase = true)
+            val sizeOk = !hasSizes || v.size.equals(size, ignoreCase = true)
+            colorOk && sizeOk
+        }
 
         if (matchedVariant != null) {
             val calcPrice = basePrice + matchedVariant.additionalPrice
@@ -234,8 +322,8 @@ class ProductDetailViewModel(
             _uiState.update {
                 it.copy(
                     selectedVariant = matchedVariant,
-                    selectedColor = matchedVariant.color ?: color,
-                    selectedSize = matchedVariant.size ?: size,
+                    selectedColor = matchedVariant.color?.takeIf { c -> c.isNotBlank() } ?: color,
+                    selectedSize = matchedVariant.size?.takeIf { s -> s.isNotBlank() } ?: size,
                     finalPrice = calcPrice,
                     stock = matchedVariant.stock,
                     isVariantSelectionValid = isStockAvailable,
@@ -285,6 +373,13 @@ class ProductDetailViewModel(
         if (product == null) {
             _uiState.update {
                 it.copy(addToCartErrorMessage = "Produk belum berhasil dimuat dari server.")
+            }
+            return
+        }
+
+        if (currentState.variantsErrorMessage != null) {
+            _uiState.update {
+                it.copy(addToCartErrorMessage = "Varian produk gagal dimuat. Silakan coba lagi.")
             }
             return
         }
@@ -372,5 +467,9 @@ class ProductDetailViewModel(
 
     fun retry() {
         currentProductId?.let { loadProductDetail(it) }
+    }
+
+    fun retryVariants() {
+        currentProductId?.let { fetchVariants(it) }
     }
 }

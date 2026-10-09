@@ -238,7 +238,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/surfaceContainerLowest"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -248,163 +250,163 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                <!-- Color Options -->
-                <LinearLayout
-                    android:id="@+id/layoutColorContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <ProgressBar
+                    android:id="@+id/pbVariants"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="12dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Warna: "
-                            android:textColor="@color/textSecondary"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:id="@+id/tvSelectedColor"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            tools:text="Hitam" />
-                    </LinearLayout>
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroupColor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        app:singleSelection="true"
-                        app:selectionRequired="true">
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="Hitam"
-                            tools:ignore="TouchTargetSizeCheck" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Putih"
-                            tools:ignore="TouchTargetSizeCheck" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Biru"
-                            tools:ignore="TouchTargetSizeCheck" />
-                    </com.google.android.material.chip.ChipGroup>
-                </LinearLayout>
-
-                <!-- Size Options -->
-                <LinearLayout
-                    android:id="@+id/layoutSizeContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ukuran: "
-                            android:textColor="@color/textSecondary"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:id="@+id/tvSelectedSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            tools:text="M" />
-                    </LinearLayout>
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroupSize"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        app:singleSelection="true"
-                        app:selectionRequired="true">
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="S"
-                            tools:ignore="TouchTargetSizeCheck" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="M"
-                            tools:ignore="TouchTargetSizeCheck" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="L"
-                            tools:ignore="TouchTargetSizeCheck" />
-                    </com.google.android.material.chip.ChipGroup>
-                </LinearLayout>
-
-                <!-- Variant Warning / Stock Display -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Stok Varian: "
-                        android:textColor="@color/textSecondary"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tvVariantStock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        tools:text="15 buah" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvVariantInstruction"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:background="@drawable/bg_filter_pill_active"
-                    android:padding="8dp"
-                    android:textColor="@color/colorError"
-                    android:textSize="11sp"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:text="Kombinasi varian ini sedang tidak tersedia." />
+                    tools:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/layoutVariantError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvVariantsError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorError"
+                        android:textSize="12sp"
+                        tools:text="Gagal memuat varian produk." />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRetryVariants"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Coba Lagi"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutVariantContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <!-- Color Options -->
+                    <LinearLayout
+                        android:id="@+id/layoutColorContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Warna: "
+                                android:textColor="@color/textSecondary"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/tvSelectedColor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                tools:text="Hitam" />
+                        </LinearLayout>
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroupColor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            app:selectionRequired="true"
+                            app:singleSelection="true" />
+                    </LinearLayout>
+
+                    <!-- Size Options -->
+                    <LinearLayout
+                        android:id="@+id/layoutSizeContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ukuran: "
+                                android:textColor="@color/textSecondary"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/tvSelectedSize"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                tools:text="M" />
+                        </LinearLayout>
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroupSize"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            app:selectionRequired="true"
+                            app:singleSelection="true" />
+                    </LinearLayout>
+
+                    <!-- Variant Warning / Stock Display -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Stok Varian: "
+                            android:textColor="@color/textSecondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvVariantStock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:text="15 buah" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvVariantInstruction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_filter_pill_active"
+                        android:padding="8dp"
+                        android:textColor="@color/colorError"
+                        android:textSize="11sp"
+                        android:visibility="gone"
+                        tools:text="Kombinasi varian ini sedang tidak tersedia."
+                        tools:visibility="visible" />
+                </LinearLayout>
 
             </LinearLayout>
 

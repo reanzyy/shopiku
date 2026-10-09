@@ -94,6 +94,10 @@ class ProductDetailActivity : AppCompatActivity() {
             viewModel.retry()
         }
 
+        binding.btnRetryVariants.setOnClickListener {
+            viewModel.retryVariants()
+        }
+
         binding.btnShare.setOnClickListener {
             val productName = binding.tvProductName.text.toString()
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
@@ -166,13 +170,10 @@ class ProductDetailActivity : AppCompatActivity() {
             }
         }
 
-        // Render Variant Section
         renderVariantsUi(state)
 
-        // Quantity State
         binding.tvQuantity.text = state.selectedQuantity.toString()
 
-        // Reviews State
         if (state.isReviewsLoading) {
             binding.pbReviews.visibility = View.VISIBLE
             binding.tvNoReviews.visibility = View.GONE
@@ -189,7 +190,6 @@ class ProductDetailActivity : AppCompatActivity() {
             }
         }
 
-        // Add to Cart Loading & Validation State
         if (state.isAddingToCart) {
             binding.btnAddToCart.isEnabled = false
             binding.pbAddToCart.visibility = View.VISIBLE
@@ -200,7 +200,6 @@ class ProductDetailActivity : AppCompatActivity() {
 
         val anchorView: View = binding.btnAddToCart.parent as? View ?: binding.btnAddToCart
 
-        // Snackbar Feedback
         state.successMessage?.let { msg ->
             Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
                 .setAnchorView(anchorView)
@@ -220,21 +219,52 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun renderVariantsUi(state: ProductDetailUiState) {
-        if (state.variants.isEmpty()) {
-            binding.layoutVariantSection.visibility = View.GONE
-            return
+        when {
+            state.isVariantsLoading -> {
+                binding.layoutVariantSection.visibility = View.VISIBLE
+                binding.pbVariants.visibility = View.VISIBLE
+                binding.layoutVariantError.visibility = View.GONE
+                binding.layoutVariantContent.visibility = View.GONE
+            }
+            state.variantsErrorMessage != null -> {
+                binding.layoutVariantSection.visibility = View.VISIBLE
+                binding.pbVariants.visibility = View.GONE
+                binding.layoutVariantError.visibility = View.VISIBLE
+                binding.layoutVariantContent.visibility = View.GONE
+                binding.tvVariantsError.text = state.variantsErrorMessage
+            }
+            state.variants.isEmpty() -> {
+                binding.layoutVariantSection.visibility = View.GONE
+            }
+            else -> {
+                binding.layoutVariantSection.visibility = View.VISIBLE
+                binding.pbVariants.visibility = View.GONE
+                binding.layoutVariantError.visibility = View.GONE
+                binding.layoutVariantContent.visibility = View.VISIBLE
+                bindVariantChips(state)
+            }
+        }
+    }
+
+    private fun bindVariantChips(state: ProductDetailUiState) {
+        val hasColors = state.availableColors.isNotEmpty()
+        val hasSizes = state.availableSizes.isNotEmpty()
+        // Keep all colors enabled so users can switch freely; sizes not available
+        // for the selected color are disabled (selectColor auto-picks a valid size).
+        val enabledSizes = if (hasColors && !state.selectedColor.isNullOrBlank()) {
+            state.sizesForSelectedColor()
+        } else {
+            state.availableSizes
         }
 
-        binding.layoutVariantSection.visibility = View.VISIBLE
-
-        // Render Color Chips
         binding.chipGroupColor.removeAllViews()
-        if (state.availableColors.isNotEmpty()) {
+        if (hasColors) {
             binding.layoutColorContainer.visibility = View.VISIBLE
             state.availableColors.forEach { color ->
                 val chip = Chip(this).apply {
                     text = color
                     isCheckable = true
+                    isEnabled = true
                     isChecked = color.equals(state.selectedColor, ignoreCase = true)
                     setOnClickListener {
                         viewModel.selectColor(color)
@@ -242,31 +272,34 @@ class ProductDetailActivity : AppCompatActivity() {
                 }
                 binding.chipGroupColor.addView(chip)
             }
+            binding.tvSelectedColor.text = state.selectedColor ?: "-"
         } else {
             binding.layoutColorContainer.visibility = View.GONE
         }
 
-        // Render Size Chips
         binding.chipGroupSize.removeAllViews()
-        if (state.availableSizes.isNotEmpty()) {
+        if (hasSizes) {
             binding.layoutSizeContainer.visibility = View.VISIBLE
             state.availableSizes.forEach { size ->
+                val chipEnabled = enabledSizes.any { it.equals(size, ignoreCase = true) }
                 val chip = Chip(this).apply {
                     text = size
                     isCheckable = true
+                    isEnabled = chipEnabled
                     isChecked = size.equals(state.selectedSize, ignoreCase = true)
                     setOnClickListener {
-                        viewModel.selectSize(size)
+                        if (chipEnabled) {
+                            viewModel.selectSize(size)
+                        }
                     }
                 }
                 binding.chipGroupSize.addView(chip)
             }
+            binding.tvSelectedSize.text = state.selectedSize ?: "-"
         } else {
             binding.layoutSizeContainer.visibility = View.GONE
         }
 
-        binding.tvSelectedColor.text = state.selectedColor ?: "-"
-        binding.tvSelectedSize.text = state.selectedSize ?: "-"
         binding.tvVariantStock.text = "${state.stock} buah"
 
         if (state.variantSelectionInstruction != null) {
