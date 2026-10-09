@@ -23,29 +23,25 @@ class ProductRepository(
         try {
             val cleanQuery = searchName?.trim()?.replace("\\s+".toRegex(), " ")
 
-            // 1. Ambil data secara langsung menggunakan Supabase SDK
-            val products = try {
-                SupabaseClient.client.from("products")
-                    .select()
-                    .decodeList<Product>()
-            } catch (e: Exception) {
-                // 2. Fallback via Retrofit Supabase REST Endpoint
-                val response = apiService.getProducts(
-                    search = if (cleanQuery.isNullOrBlank()) null else cleanQuery,
-                    searchName = if (cleanQuery.isNullOrBlank()) null else cleanQuery,
-                    page = page,
-                    limit = limit
-                )
-                if (response.isSuccessful) {
-                    response.body() ?: emptyList()
-                } else {
-                    throw Exception("Supabase REST Error (${response.code()}): ${response.message()}")
+            // 1. Ambil data produk dari Supabase (Retrofit Supabase REST Endpoint)
+            val response = apiService.getProducts()
+            val products = if (response.isSuccessful) {
+                response.body() ?: emptyList()
+            } else {
+                // Fallback ke Supabase SDK Native
+                try {
+                    SupabaseClient.client.from("products")
+                        .select()
+                        .decodeList<Product>()
+                } catch (e: Exception) {
+                    throw Exception("Gagal memuat produk (${response.code()}): ${response.message()}")
                 }
             }
 
             if (products.isEmpty()) {
                 emit(UiState.Empty)
             } else {
+                // Filter lokal berdasarkan nama, deskripsi, atau kategori
                 val filteredProducts = if (!cleanQuery.isNullOrBlank()) {
                     products.filter { product ->
                         product.name?.contains(cleanQuery, ignoreCase = true) == true ||
@@ -63,14 +59,16 @@ class ProductRepository(
                 }
             }
         } catch (e: Exception) {
-            emit(UiState.Error("Terjadi kesalahan koneksi Supabase: ${e.localizedMessage ?: "Koneksi bermasalah"}"))
+            emit(UiState.Error("Terjadi kesalahan koneksi: ${e.localizedMessage ?: "Koneksi bermasalah"}"))
         }
     }.flowOn(Dispatchers.IO)
 
     fun getProductDetail(id: String): Flow<UiState<Product>> = flow {
         emit(UiState.Loading)
         try {
-            val product = try {
+            val response = apiService.getProductById("eq.$id")
+            val productList = response.body()
+            val product = productList?.firstOrNull() ?: try {
                 SupabaseClient.client.from("products")
                     .select {
                         filter {
@@ -78,17 +76,16 @@ class ProductRepository(
                         }
                     }.decodeSingleOrNull<Product>()
             } catch (e: Exception) {
-                val response = apiService.getProductById(id)
-                if (response.isSuccessful) response.body() else null
+                null
             }
 
             if (product != null) {
                 emit(UiState.Success(product))
             } else {
-                emit(UiState.Error("Detail produk tidak ditemukan di Supabase"))
+                emit(UiState.Error("Detail produk tidak ditemukan"))
             }
         } catch (e: Exception) {
-            emit(UiState.Error("Gagal terhubung ke Supabase: ${e.localizedMessage ?: "Koneksi bermasalah"}"))
+            emit(UiState.Error("Gagal terhubung ke server: ${e.localizedMessage ?: "Koneksi bermasalah"}"))
         }
     }.flowOn(Dispatchers.IO)
 }

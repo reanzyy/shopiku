@@ -8,33 +8,27 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ShopeeApiService {
-    @GET("products")
-    suspend fun getProducts(
-        @Query("search") search: String? = null,
-        @Query("name") searchName: String? = null,
-        @Query("page") page: Int? = null,
-        @Query("limit") limit: Int? = null
-    ): Response<List<Product>>
+    @GET("products?select=*")
+    suspend fun getProducts(): Response<List<Product>>
 
-    @GET("products/{id}")
-    suspend fun getProductById(@Path("id") id: String): Response<Product>
+    @GET("products?select=*")
+    suspend fun getProductById(@Query("id") idFilter: String): Response<List<Product>>
 
-    @GET("cart")
+    @GET("cart?select=*")
     suspend fun getCartItems(): Response<List<CartItem>>
 
     @POST("cart")
     suspend fun addToCart(@Body item: CartItem): Response<CartItem>
 
-    @PUT("cart/{id}")
+    @PUT("cart")
     suspend fun updateCartQuantity(
-        @Path("id") cartId: String,
+        @Query("id") idFilter: String,
         @Body item: CartItem
     ): Response<CartItem>
 
-    @DELETE("cart/{id}")
-    suspend fun deleteCartItem(@Path("id") cartId: String): Response<CartItem>
+    @DELETE("cart")
+    suspend fun deleteCartItem(@Query("id") idFilter: String): Response<CartItem>
 }

@@ -29,7 +29,7 @@ data class Product(
     val description: String? = "",
 
     @SerialName("imageUrl")
-    @SerializedName("imageUrl")
+    @SerializedName("imageUrl", alternate = ["image_url"])
     val imageUrl: String? = "",
 
     @SerialName("category")
