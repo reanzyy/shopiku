@@ -1,107 +1,485 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/colorBackground" tools:context=".ui.view.ProfileActivity">
-    <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/colorSurface" app:elevation="2dp">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="64dp" android:gravity="center_vertical" android:paddingHorizontal="16dp">
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Kategori" android:textColor="@color/textPrimary" android:textSize="20sp" android:textStyle="bold"/>
-            <ImageView android:id="@+id/ivProfileSearch" android:layout_width="44dp" android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Cari" android:padding="10dp" android:src="@android:drawable/ic_menu_search" app:tint="@color/onSurfaceVariant"/>
-            <FrameLayout android:layout_width="44dp" android:layout_height="44dp">
-                <ImageView android:id="@+id/ivProfileCart" android:layout_width="match_parent" android:layout_height="match_parent" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Keranjang" android:padding="10dp" android:src="@android:drawable/ic_menu_add" app:tint="@color/onSurfaceVariant"/>
-                <TextView android:layout_width="18dp" android:layout_height="18dp" android:layout_gravity="top|end" android:background="@drawable/bg_circle_btn" android:gravity="center" android:text="3" android:textColor="@color/colorOnPrimary" android:textSize="10sp" android:textStyle="bold"/>
-            </FrameLayout>
-            <TextView android:layout_width="32dp" android:layout_height="32dp" android:layout_marginStart="4dp" android:background="@drawable/bg_circle_btn" android:gravity="center" android:text="👤" android:textSize="16sp"/>
-        </LinearLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-    <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:clipToPadding="false" android:paddingBottom="92dp" app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
-            <LinearLayout android:id="@+id/cardProfileHeader" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="16dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top">
-                    <FrameLayout android:layout_width="72dp" android:layout_height="72dp">
-                        <ImageView android:id="@+id/civProfile" android:layout_width="64dp" android:layout_height="64dp" android:layout_gravity="center" android:background="@color/surfaceContainer" android:contentDescription="Foto Profil" android:src="@mipmap/ic_launcher"/>
-                        <TextView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="bottom|end" android:background="@drawable/bg_filter_pill_active" android:gravity="center" android:text="✓" android:textColor="@color/colorPrimary" android:textSize="13sp" android:textStyle="bold"/>
-                    </FrameLayout>
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:orientation="vertical">
-                        <TextView android:id="@+id/tvProfileName" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:text="Adriansyah Suryawan" android:textColor="@color/textPrimary" android:textSize="16sp" android:textStyle="bold"/>
-                        <TextView android:id="@+id/tvProfileEmail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:ellipsize="end" android:maxLines="1" android:text="adriansyah@email.com • 0812-3456-7890" android:textColor="@color/textSecondary" android:textSize="12sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_filter_pill_active" android:paddingHorizontal="8dp" android:paddingVertical="2dp" android:text="Member Gold ⭐" android:textColor="@color/colorPrimary" android:textSize="10sp" android:textStyle="bold"/>
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        tools:context=".ui.view.ProfileActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSurface"
+            app:elevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Profil Saya"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ivProfileSearch"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Cari"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:tint="@color/onSurfaceVariant" />
+
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp">
+
+                    <ImageView
+                        android:id="@+id/ivProfileCart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Keranjang"
+                        android:padding="10dp"
+                        android:src="@android:drawable/ic_menu_add"
+                        app:tint="@color/onSurfaceVariant" />
+
+                    <TextView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="top|end"
+                        android:background="@drawable/bg_circle_btn"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@color/colorOnPrimary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="4dp"
+                    android:contentDescription="Profil"
+                    android:src="@mipmap/ic_person" />
+            </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="92dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:id="@+id/cardProfileHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top">
+
+                        <FrameLayout
+                            android:layout_width="72dp"
+                            android:layout_height="72dp">
+
+                            <ImageView
+                                android:id="@+id/civProfile"
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:layout_gravity="center"
+                                android:background="@color/surfaceContainer"
+                                android:contentDescription="Foto Profil"
+                                android:src="@mipmap/ic_person" />
+
+                            <TextView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="@drawable/bg_filter_pill_active"
+                                android:gravity="center"
+                                android:text="OK"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvProfileName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="Adriansyah Suryawan"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvProfileEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="adriansyah@email.com"
+                                android:textColor="@color/textSecondary"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:background="@drawable/bg_filter_pill_active"
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="2dp"
+                                android:text="Member Gold"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnEditProfile"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:text="Ubah"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="12sp"
+                            app:cornerRadius="12dp" />
                     </LinearLayout>
-                    <com.google.android.material.button.MaterialButton android:id="@+id/btnEditProfile" style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="wrap_content" android:layout_height="40dp" android:text="Ubah" android:textColor="@color/textPrimary" android:textSize="12sp" app:cornerRadius="12dp"/>
                 </LinearLayout>
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:background="@color/surfaceContainerLow" android:orientation="vertical" android:padding="12dp">
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Progres Tingkat Platinum" android:textColor="@color/textSecondary" android:textSize="11sp" android:textStyle="bold"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1.450 / 2.000 Poin" android:textColor="@color/textPrimary" android:textSize="11sp" android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="AKTIVITAS SAYA"
+                    android:textColor="@color/onSurfaceVariant"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Pesanan Saya"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/menuOrders"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Riwayat"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
-                    <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="6dp" android:max="2000" android:progress="1450" android:progressTint="@color/colorPrimary" android:progressBackgroundTint="@color/surfaceContainerHighest"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Kumpulkan 550 poin lagi sebelum 31 Des untuk naik kelas ke Platinum &amp; nikmati bebas ongkir tanpa batas." android:textColor="@color/textSecondary" android:textSize="11sp"/>
-                </LinearLayout>
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@color/surfaceContainer" android:padding="12dp">
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
-                        <TextView android:text="SHOPIKUPay" android:textColor="@color/textSecondary" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="Rp452.800" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="+ Isi Saldo" android:textColor="@color/colorPrimary" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Belum Bayar"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Diproses"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/btnTrack"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Dikirim"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Selesai"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/menuReviews"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Beri Ulasan"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="11sp" />
                     </LinearLayout>
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
-                        <TextView android:text="SHOPIKUKoin" android:textColor="@color/textSecondary" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="1.450 Poin" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="Tukar" android:textColor="@color/textSecondary" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                    </LinearLayout>
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
-                        <TextView android:text="Voucher" android:textColor="@color/textSecondary" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="5 Kupon" android:textColor="@color/textPrimary" android:textSize="14sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="Tersedia" android:textColor="@color/colorPrimary" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout android:id="@+id/cardOrders" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical" android:padding="16dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Pesanan Saya" android:textColor="@color/textPrimary" android:textSize="16sp" android:textStyle="bold"/>
-                    <TextView android:id="@+id/menuOrders" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Riwayat ›" android:textColor="@color/colorPrimary" android:textSize="12sp" android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="DOMPET DAN KUPON"
+                    android:textColor="@color/onSurfaceVariant"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/menuVouchers"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Voucher Saya"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuCoins"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Koin SHOPIKU"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuWishlist"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Favorit Saya"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuFollowedStores"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Toko Langganan"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
                 </LinearLayout>
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="💳\nBelum Bayar\n1" android:textColor="@color/textPrimary" android:textSize="11sp"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="📦\nDiproses\n1" android:textColor="@color/textPrimary" android:textSize="11sp"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="🚚\nDikirim\n1" android:textColor="@color/colorPrimary" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="✅\nSelesai" android:textColor="@color/textPrimary" android:textSize="11sp"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭐\nBeri Ulasan\n2" android:textColor="@color/textPrimary" android:textSize="11sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="PENGATURAN AKUN DAN KEAMANAN"
+                    android:textColor="@color/onSurfaceVariant"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/menuAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Alamat Saya"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuBankCards"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Rekening Bank dan Kartu"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuSecurity"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Keamanan Akun"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Notifikasi"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="PUSAT BANTUAN DAN INFO"
+                    android:textColor="@color/onSurfaceVariant"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_wallet_strip"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/menuHelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Pusat Bantuan FAQ"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuChatCs"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Chat CS SHOPIKU 247"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/menuPrivacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Syarat dan Kebijakan Privasi"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/menuAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:text="Tentang SHOPIKU"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <LinearLayout android:id="@+id/cardRecentShipment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:background="@drawable/bg_wallet_strip" android:gravity="center_vertical" android:padding="14dp">
-                <View android:layout_width="5dp" android:layout_height="match_parent" android:background="@color/colorPrimary"/>
-                <ImageView android:layout_width="48dp" android:layout_height="48dp" android:layout_marginStart="10dp" android:background="@color/surfaceContainerLow" android:contentDescription="Wireless Earbuds Pro ANC"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_filter_pill_active" android:paddingHorizontal="6dp" android:paddingVertical="2dp" android:text="Dalam Perjalanan • SiCepat REG" android:textColor="@color/colorPrimary" android:textSize="10sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:ellipsize="end" android:maxLines="1" android:text="Wireless Earbuds Pro ANC" android:textColor="@color/textPrimary" android:textSize="13sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Estimasi tiba: Besok sore (14:00 - 18:00)" android:textColor="@color/textSecondary" android:textSize="11sp"/>
-                </LinearLayout>
-                <com.google.android.material.button.MaterialButton android:id="@+id/btnTrack" android:layout_width="wrap_content" android:layout_height="40dp" android:backgroundTint="@color/colorPrimary" android:text="Lacak" android:textColor="@color/colorOnPrimary" android:textSize="12sp" app:cornerRadius="12dp"/>
-            </LinearLayout>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:text="AKTIVITAS SAYA" android:textColor="@color/onSurfaceVariant" android:textSize="12sp" android:textStyle="bold"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical">
-                <TextView android:id="@+id/menuTransactions" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="📄  Riwayat Transaksi\nSemua pembayaran &amp; pembelian bulanan" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuWishlist" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="❤  Wishlist / Favorit\n18 produk tersimpan" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuReviews" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="⭐  Ulasan Saya\nBeri penilaian &amp; dapatkan koin tambahan" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuFollowedStores" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="🏬  Toko Langganan\n5 toko resmi diikuti" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-            </LinearLayout>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:text="PENGATURAN AKUN &amp; KEAMANAN" android:textColor="@color/onSurfaceVariant" android:textSize="12sp" android:textStyle="bold"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical">
-                <TextView android:id="@+id/menuAddress" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="📍  Alamat Saya\nAlamat utama: Cirebon, Jawa Barat" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuBankCards" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="💳  Rekening Bank &amp; Kartu\nBCA, Mandiri, SHOPIKUPay terhubung" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuSecurity" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="🔒  Keamanan Akun ✓\nPIN, Biometrik &amp; 2FA aktif" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuSettings" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="🔔  Notifikasi\nPromo, transaksi, update pesanan" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-            </LinearLayout>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:text="PUSAT BANTUAN &amp; INFO" android:textColor="@color/onSurfaceVariant" android:textSize="12sp" android:textStyle="bold"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_wallet_strip" android:orientation="vertical">
-                <TextView android:id="@+id/menuHelp" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="❔  Pusat Bantuan / FAQ\nPanduan belanja &amp; solusi kilat" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuChatCs" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="💬  Chat CS SHOPIKU 24/7\nBantuan langsung dari agen ramah" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuPrivacy" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="📃  Syarat &amp; Kebijakan Privasi\nPerlindungan data dan transparansi" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-                <TextView android:id="@+id/menuAbout" android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:text="ℹ  Tentang SHOPIKU\nVersi 2.4.0 (Build 2026-Android)" android:textColor="@color/textPrimary" android:textSize="13sp"/>
-            </LinearLayout>
-            <com.google.android.material.button.MaterialButton android:id="@+id/btnLogout" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="18dp" android:backgroundTint="@color/colorErrorLight" android:text="Keluar dari Akun" android:textColor="@color/colorError" android:textStyle="bold" app:cornerRadius="12dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginBottom="16dp" android:gravity="center" android:text="SHOPIKU © 2026 • Belanja Mudah &amp; Terpercaya" android:textColor="@color/textSecondary" android:textSize="11sp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="@color/colorErrorLight"
+                android:text="Keluar dari Akun"
+                android:textColor="@color/colorError"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="SHOPIKU 2026 - Belanja Mudah"
+                android:textColor="@color/textSecondary"
+                android:textSize="11sp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <com.google.android.material.bottomnavigation.BottomNavigationView android:id="@+id/bottomNavigation" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:background="@color/colorSurface" app:itemIconTint="@color/bottom_nav_color_state" app:itemTextColor="@color/bottom_nav_color_state" app:labelVisibilityMode="labeled" app:menu="@menu/bottom_navigation_menu"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorSurface"
+        app:itemIconTint="@color/bottom_nav_color_state"
+        app:itemTextColor="@color/bottom_nav_color_state"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_menu" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

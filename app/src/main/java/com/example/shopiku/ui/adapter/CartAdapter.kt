@@ -11,6 +11,7 @@ import com.example.shopiku.data.model.CartItem
 import com.example.shopiku.databinding.ItemCartBinding
 
 class CartAdapter(
+    private val onProductClick: (CartItem) -> Unit,
     private val onIncreaseQty: (CartItem) -> Unit,
     private val onDecreaseQty: (CartItem) -> Unit,
     private val onDeleteItem: (CartItem) -> Unit,
@@ -55,6 +56,10 @@ class CartAdapter(
         fun bind(item: CartItem) {
             val isChecked = isItemChecked(item.id)
 
+            // Lepas listener terlebih dahulu sebelum mengubah status checked
+            binding.cbCartItem.setOnCheckedChangeListener(null)
+            binding.cbStoreSelect.setOnCheckedChangeListener(null)
+
             binding.cbCartItem.isChecked = isChecked
             binding.cbStoreSelect.isChecked = isChecked
 
@@ -80,6 +85,19 @@ class CartAdapter(
                 item.id?.let { checkedItemsMap[it] = checked }
                 binding.cbCartItem.isChecked = checked
                 onItemCheckedChange(item, checked)
+            }
+
+            // Navigasi saat produk diklik
+            binding.ivCartProduct.setOnClickListener {
+                onProductClick(item)
+            }
+
+            binding.tvCartProductName.setOnClickListener {
+                onProductClick(item)
+            }
+
+            binding.tvCartVariant.setOnClickListener {
+                onProductClick(item)
             }
 
             binding.btnIncreaseCartQty.setOnClickListener {

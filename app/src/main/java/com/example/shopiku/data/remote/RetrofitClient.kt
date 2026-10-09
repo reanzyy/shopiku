@@ -52,4 +52,31 @@ object RetrofitClient {
             .build()
             .create(CartApiService::class.java)
     }
+
+    val checkoutApiService: CheckoutApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CheckoutApiService::class.java)
+    }
+
+    val paymentApiService: PaymentApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PaymentApiService::class.java)
+    }
+
+    val productVariantApiService: ProductVariantApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ProductVariantApiService::class.java)
+    }
 }

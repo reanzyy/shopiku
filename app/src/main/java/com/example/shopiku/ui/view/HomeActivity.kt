@@ -1,4 +1,4 @@
-﻿package com.example.shopiku.ui.view
+package com.example.shopiku.ui.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shopiku.R
 import com.example.shopiku.data.common.UiState
+import com.example.shopiku.data.model.FlashSaleItem
 import com.example.shopiku.databinding.ActivityHomeBinding
+import com.example.shopiku.ui.adapter.FlashSaleAdapter
 import com.example.shopiku.ui.adapter.ProductAdapter
 import com.example.shopiku.ui.viewmodel.ProductViewModel
 import kotlinx.coroutines.launch
@@ -20,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private val viewModel: ProductViewModel by viewModels()
     private lateinit var productAdapter: ProductAdapter
+    private lateinit var flashSaleAdapter: FlashSaleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
         setupListeners()
         setupBottomNavigation()
+        setupFlashSale()
         setupRecommendedProducts()
         observeRecommendedProducts()
     }
@@ -69,6 +74,24 @@ class HomeActivity : AppCompatActivity() {
         binding.gridCategoriesStatic.setOnClickListener {
             startActivity(Intent(this, CategoriesActivity::class.java))
         }
+    }
+
+    private fun setupFlashSale() {
+        flashSaleAdapter = FlashSaleAdapter { item ->
+            val intent = Intent(this, ProductDetailActivity::class.java).apply {
+                putExtra("PRODUCT_ID", item.id)
+                putExtra("PRODUCT_NAME", item.name)
+            }
+            startActivity(intent)
+        }
+
+        binding.rvFlashSale.apply {
+            layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = flashSaleAdapter
+        }
+
+        // Tampilkan dummy flash sale langsung tanpa koneksi Supabase
+        flashSaleAdapter.submitList(FlashSaleItem.getDummyFlashSaleList())
     }
 
     private fun setupRecommendedProducts() {

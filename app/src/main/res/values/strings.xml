@@ -87,7 +87,7 @@
     <string name="sold_count_format">%s terjual</string>
     <string name="rating_format">%.1f</string>
     <string name="discount_format">-%d%%</string>
-    <string name="location_prefix">📍 </string>
+    <string name="location_prefix"></string>
 
     <!-- Product Detail -->
     <string name="product_detail_title">Detail Produk</string>

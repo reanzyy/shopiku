@@ -16,6 +16,7 @@ import com.example.shopiku.databinding.ActivityProductDetailBinding
 import com.example.shopiku.ui.adapter.ReviewAdapter
 import com.example.shopiku.ui.viewmodel.ProductDetailUiState
 import com.example.shopiku.ui.viewmodel.ProductDetailViewModel
+import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -143,7 +144,7 @@ class ProductDetailActivity : AppCompatActivity() {
         val product = state.productDetail
         if (product != null) {
             binding.tvProductName.text = product.name
-            binding.tvPrice.text = product.getFormattedPrice()
+            binding.tvPrice.text = state.getFormattedFinalPrice()
             binding.tvRating.text = "★ ${product.rating ?: 0.0}"
             binding.tvRatingCount.text = "(${state.reviews.size} ulasan)"
 
@@ -155,12 +156,18 @@ class ProductDetailActivity : AppCompatActivity() {
                 product.description
             }
 
-            binding.ivProductImage.load(product.imageUrl) {
+            val displayImg = state.selectedVariant?.imageUrl.takeIf { !it.isNullOrBlank() }
+                ?: product.imageUrl
+
+            binding.ivProductImage.load(displayImg) {
                 crossfade(true)
                 placeholder(R.drawable.ic_launcher_foreground)
                 error(R.drawable.ic_launcher_foreground)
             }
         }
+
+        // Render Variant Section
+        renderVariantsUi(state)
 
         // Quantity State
         binding.tvQuantity.text = state.selectedQuantity.toString()
@@ -182,16 +189,15 @@ class ProductDetailActivity : AppCompatActivity() {
             }
         }
 
-        // Add to Cart Loading State
+        // Add to Cart Loading & Validation State
         if (state.isAddingToCart) {
             binding.btnAddToCart.isEnabled = false
             binding.pbAddToCart.visibility = View.VISIBLE
         } else {
-            binding.btnAddToCart.isEnabled = true
+            binding.btnAddToCart.isEnabled = state.isVariantSelectionValid
             binding.pbAddToCart.visibility = View.GONE
         }
 
-        // Anchor view for Snackbar so it floats above bottom navigation bar
         val anchorView: View = binding.btnAddToCart.parent as? View ?: binding.btnAddToCart
 
         // Snackbar Feedback
@@ -210,6 +216,64 @@ class ProductDetailActivity : AppCompatActivity() {
                 .setAnchorView(anchorView)
                 .show()
             viewModel.clearAddToCartMessages()
+        }
+    }
+
+    private fun renderVariantsUi(state: ProductDetailUiState) {
+        if (state.variants.isEmpty()) {
+            binding.layoutVariantSection.visibility = View.GONE
+            return
+        }
+
+        binding.layoutVariantSection.visibility = View.VISIBLE
+
+        // Render Color Chips
+        binding.chipGroupColor.removeAllViews()
+        if (state.availableColors.isNotEmpty()) {
+            binding.layoutColorContainer.visibility = View.VISIBLE
+            state.availableColors.forEach { color ->
+                val chip = Chip(this).apply {
+                    text = color
+                    isCheckable = true
+                    isChecked = color.equals(state.selectedColor, ignoreCase = true)
+                    setOnClickListener {
+                        viewModel.selectColor(color)
+                    }
+                }
+                binding.chipGroupColor.addView(chip)
+            }
+        } else {
+            binding.layoutColorContainer.visibility = View.GONE
+        }
+
+        // Render Size Chips
+        binding.chipGroupSize.removeAllViews()
+        if (state.availableSizes.isNotEmpty()) {
+            binding.layoutSizeContainer.visibility = View.VISIBLE
+            state.availableSizes.forEach { size ->
+                val chip = Chip(this).apply {
+                    text = size
+                    isCheckable = true
+                    isChecked = size.equals(state.selectedSize, ignoreCase = true)
+                    setOnClickListener {
+                        viewModel.selectSize(size)
+                    }
+                }
+                binding.chipGroupSize.addView(chip)
+            }
+        } else {
+            binding.layoutSizeContainer.visibility = View.GONE
+        }
+
+        binding.tvSelectedColor.text = state.selectedColor ?: "-"
+        binding.tvSelectedSize.text = state.selectedSize ?: "-"
+        binding.tvVariantStock.text = "${state.stock} buah"
+
+        if (state.variantSelectionInstruction != null) {
+            binding.tvVariantInstruction.visibility = View.VISIBLE
+            binding.tvVariantInstruction.text = state.variantSelectionInstruction
+        } else {
+            binding.tvVariantInstruction.visibility = View.GONE
         }
     }
 }

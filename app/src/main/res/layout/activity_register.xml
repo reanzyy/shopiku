@@ -31,7 +31,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mulai Belanja di SHOPIKU ✨"
+                    android:text="Mulai Belanja di SHOPIKU"
                     android:textColor="@color/on_surface"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -213,7 +213,7 @@
                         android:background="@drawable/bg_phone_prefix"
                         android:gravity="center"
                         android:paddingHorizontal="10dp"
-                        android:text="🇮🇩  +62"
+                        android:text="+62"
                         android:textColor="@color/on_surface"
                         android:textSize="13sp"
                         android:textStyle="bold" />

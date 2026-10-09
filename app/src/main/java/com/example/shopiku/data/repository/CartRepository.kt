@@ -6,6 +6,7 @@ import com.example.shopiku.data.model.ApiErrorResponse
 import com.example.shopiku.data.model.CartItem
 import com.example.shopiku.data.model.CartResponse
 import com.example.shopiku.data.model.Product
+import com.example.shopiku.data.model.ProductVariant
 import com.example.shopiku.data.remote.CartApiService
 import com.example.shopiku.data.remote.RetrofitClient
 import com.example.shopiku.data.remote.ShopeeApiService
@@ -23,23 +24,12 @@ class CartRepository(
     private val api: ShopeeApiService = RetrofitClient.apiService,
     private val cartApi: CartApiService = RetrofitClient.cartApiService
 ) {
-    suspend fun getCartItems(): Response<List<CartItem>> = api.getCartItems()
-
-    suspend fun addToCart(item: CartItem): Response<CartItem> = api.addToCart(item)
-
-    suspend fun updateQuantity(cartId: String, item: CartItem): Response<CartItem> =
-        api.updateCartQuantity(cartId, item)
-
-    suspend fun deleteCartItem(cartId: String): Response<CartItem> =
-        api.deleteCartItem(cartId)
-
     /**
-     * Ambil seluruh item di keranjang beserta detail produknya untuk ditampilkan di CartActivity.
+     * Ambil seluruh item di keranjang beserta detail produk dan variannya.
      */
     fun getCartFullItems(): Flow<UiState<List<CartItem>>> = flow {
         emit(UiState.Loading)
         try {
-            // 1. Ambil data keranjang dari Supabase via Retrofit / Native
             val cartList: List<CartResponse> = try {
                 val resp = cartApi.getCartItems()
                 if (resp.isSuccessful) resp.body() ?: emptyList()
@@ -57,7 +47,6 @@ class CartRepository(
                 return@flow
             }
 
-            // 2. Ambil daftar produk untuk mencocokkan nama, harga, dan gambar
             val productsList = try {
                 val resp = api.getProducts()
                 if (resp.isSuccessful) resp.body() ?: emptyList()
@@ -72,27 +61,49 @@ class CartRepository(
 
             val productMap = productsList.associateBy { it.id }
 
-            // 3. Gabungkan data keranjang dengan data produk
+            // Ambil data varian
+            val allVariants = try {
+                SupabaseClient.client.from("product_variants").select().decodeList<ProductVariant>()
+            } catch (e: Exception) {
+                emptyList()
+            }
+            val variantMap = allVariants.associateBy { it.id }
+
             val fullItems = cartList.mapNotNull { cartRow ->
                 val pIdStr = cartRow.product_id?.toString() ?: ""
                 val product = productMap[pIdStr]
+                val variant = cartRow.variant_id?.let { variantMap[it] }
+
+                val basePrice = product?.price ?: 0.0
+                val addPrice = variant?.additionalPrice ?: 0.0
+                val finalUnitPrice = basePrice + addPrice
+
+                val imageUrl = variant?.imageUrl.takeIf { !it.isNullOrBlank() }
+                    ?: product?.imageUrl ?: ""
+
+                val variantDisplayStr = variant?.getDisplayName() ?: "Variansi Standar"
+
                 if (product != null) {
                     CartItem(
                         id = cartRow.id,
                         productId = pIdStr,
+                        variantId = cartRow.variant_id,
+                        variantName = variantDisplayStr,
                         name = product.name ?: "Produk",
-                        price = product.price ?: 0.0,
+                        price = finalUnitPrice,
                         quantity = cartRow.quantity ?: 1,
-                        imageUrl = product.imageUrl ?: ""
+                        imageUrl = imageUrl
                     )
                 } else if (cartRow.product_id != null) {
                     CartItem(
                         id = cartRow.id,
                         productId = pIdStr,
+                        variantId = cartRow.variant_id,
+                        variantName = variantDisplayStr,
                         name = "Produk #${cartRow.product_id}",
-                        price = 0.0,
+                        price = finalUnitPrice,
                         quantity = cartRow.quantity ?: 1,
-                        imageUrl = ""
+                        imageUrl = imageUrl
                     )
                 } else null
             }
@@ -153,31 +164,35 @@ class CartRepository(
     }.flowOn(Dispatchers.IO)
 
     /**
-     * Tambah item ke keranjang Supabase dengan dukungan UUID generator, agregasi item duplikat,
-     * serta fallback ke Supabase SDK Native jika REST API bermasalah.
+     * Tambah item ke keranjang Supabase dengan dukungan variant_id.
      */
-    fun addToCartWithResult(productId: Long, quantity: Int): Flow<UiState<CartResponse>> = flow {
+    fun addToCartWithResult(
+        productId: Long,
+        variantId: Long? = null,
+        quantity: Int
+    ): Flow<UiState<CartResponse>> = flow {
         emit(UiState.Loading)
         try {
-            // 1. Cek apakah item sudah ada di keranjang untuk menggabungkan kuantitas
             val existingCartResponse = try {
                 cartApi.getCartItems()
             } catch (e: Exception) {
                 null
             }
 
-            val existingItem = existingCartResponse?.body()?.find { it.product_id == productId }
+            val existingItem = existingCartResponse?.body()?.find {
+                it.product_id == productId && it.variant_id == variantId
+            }
 
             var isInsertedViaRetrofit = false
             var resultCartResponse: CartResponse? = null
             var lastErrorMessage: String? = null
 
             if (existingItem != null && !existingItem.id.isNullOrBlank()) {
-                // Update kuantitas item yang sudah ada
                 val newQuantity = (existingItem.quantity ?: 0) + quantity
                 val request = AddToCartRequest(
                     id = existingItem.id,
                     product_id = productId,
+                    variant_id = variantId,
                     quantity = newQuantity
                 )
                 val response = cartApi.updateCartQuantity("eq.${existingItem.id}", request)
@@ -186,17 +201,18 @@ class CartRepository(
                     resultCartResponse = response.body()?.firstOrNull() ?: CartResponse(
                         id = existingItem.id,
                         product_id = productId,
+                        variant_id = variantId,
                         quantity = newQuantity
                     )
                 } else {
                     lastErrorMessage = parseHttpError(response)
                 }
             } else {
-                // Insert item baru dengan UUID
                 val newId = UUID.randomUUID().toString()
                 val request = AddToCartRequest(
                     id = newId,
                     product_id = productId,
+                    variant_id = variantId,
                     quantity = quantity
                 )
                 val response = cartApi.addToCart(request)
@@ -205,6 +221,7 @@ class CartRepository(
                     resultCartResponse = response.body()?.firstOrNull() ?: CartResponse(
                         id = newId,
                         product_id = productId,
+                        variant_id = variantId,
                         quantity = quantity
                     )
                 } else {
@@ -215,45 +232,38 @@ class CartRepository(
             if (isInsertedViaRetrofit && resultCartResponse != null) {
                 emit(UiState.Success(resultCartResponse))
             } else {
-                // Fallback ke Supabase SDK Native jika Retrofit gagal
                 try {
                     val fallbackId = UUID.randomUUID().toString()
                     val fallbackRequest = AddToCartRequest(
                         id = fallbackId,
                         product_id = productId,
+                        variant_id = variantId,
                         quantity = quantity
                     )
                     SupabaseClient.client.from("cart").insert(fallbackRequest)
-                    emit(UiState.Success(CartResponse(id = fallbackId, product_id = productId, quantity = quantity)))
+                    emit(UiState.Success(CartResponse(id = fallbackId, product_id = productId, variant_id = variantId, quantity = quantity)))
                 } catch (e: Exception) {
                     val finalError = lastErrorMessage ?: "Gagal memasukkan data ke Supabase: ${e.localizedMessage}"
                     emit(UiState.Error(finalError))
                 }
             }
-        } catch (e: java.net.UnknownHostException) {
-            emit(UiState.Error("Tidak ada koneksi internet. Periksa jaringan Anda."))
-        } catch (e: java.net.SocketTimeoutException) {
-            emit(UiState.Error("Koneksi timeout. Coba beberapa saat lagi."))
         } catch (e: Exception) {
-            // Fallback ke Supabase SDK Native jika terjadi exception jaringan
             try {
                 val fallbackId = UUID.randomUUID().toString()
                 val fallbackRequest = AddToCartRequest(
                     id = fallbackId,
                     product_id = productId,
+                    variant_id = variantId,
                     quantity = quantity
                 )
                 SupabaseClient.client.from("cart").insert(fallbackRequest)
-                emit(UiState.Success(CartResponse(id = fallbackId, product_id = productId, quantity = quantity)))
+                emit(UiState.Success(CartResponse(id = fallbackId, product_id = productId, variant_id = variantId, quantity = quantity)))
             } catch (sdkException: Exception) {
                 emit(UiState.Error("Gagal menyimpan ke Supabase: ${sdkException.localizedMessage ?: e.localizedMessage}"))
             }
         }
     }.flowOn(Dispatchers.IO)
 
-    /**
-     * Ambil total kuantitas seluruh item di keranjang untuk pembaruan badge.
-     */
     fun getCartTotalCount(): Flow<UiState<Int>> = flow {
         emit(UiState.Loading)
         try {
@@ -263,7 +273,6 @@ class CartRepository(
                 val totalQty = items.sumOf { it.quantity ?: 0 }
                 emit(UiState.Success(totalQty))
             } else {
-                // Fallback ke Supabase SDK Native
                 try {
                     val items = SupabaseClient.client.from("cart").select().decodeList<CartResponse>()
                     val totalQty = items.sumOf { it.quantity ?: 0 }
@@ -300,7 +309,7 @@ class CartRepository(
             400 -> parsedMessage ?: "Permintaan tidak valid (400). Periksa skema tabel Supabase."
             401, 403 -> parsedMessage ?: "Akses ditolak (401/403). Periksa RLS Policy di Supabase Dashboard."
             404 -> parsedMessage ?: "Tabel atau endpoint 'cart' tidak ditemukan (404)."
-            422 -> parsedMessage ?: "Data tidak dapat diproses (422). Periksa foreign key product_id."
+            422 -> parsedMessage ?: "Data tidak dapat diproses (422)."
             500 -> parsedMessage ?: "Terjadi kesalahan pada server Supabase (500)."
             else -> parsedMessage ?: "Gagal menyimpan ke keranjang (HTTP $code)."
         }

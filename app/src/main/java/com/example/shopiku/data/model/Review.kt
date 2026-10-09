@@ -24,5 +24,9 @@ data class Review(
 
     @SerialName("created_at")
     @SerializedName("created_at", alternate = ["createdAt"])
-    val createdAt: String? = null
+    val createdAt: String? = null,
+
+    @SerialName("user_name")
+    @SerializedName("user_name", alternate = ["userName", "username"])
+    val userName: String? = null
 )

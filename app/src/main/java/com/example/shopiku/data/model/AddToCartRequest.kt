@@ -15,6 +15,10 @@ data class AddToCartRequest(
     @SerializedName("product_id", alternate = ["productId"])
     val product_id: Long,
 
+    @SerialName("variant_id")
+    @SerializedName("variant_id", alternate = ["variantId"])
+    val variant_id: Long? = null,
+
     @SerialName("quantity")
     @SerializedName("quantity")
     val quantity: Int

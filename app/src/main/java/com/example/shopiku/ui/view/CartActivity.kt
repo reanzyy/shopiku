@@ -1,4 +1,4 @@
-﻿package com.example.shopiku.ui.view
+package com.example.shopiku.ui.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -38,11 +38,18 @@ class CartActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchCart()
+        viewModel.fetchCart(showLoading = false)
     }
 
     private fun setupRecyclerView() {
         cartAdapter = CartAdapter(
+            onProductClick = { item ->
+                val intent = Intent(this, ProductDetailActivity::class.java).apply {
+                    putExtra("PRODUCT_ID", item.productId)
+                    putExtra("PRODUCT_NAME", item.name)
+                }
+                startActivity(intent)
+            },
             onIncreaseQty = { item -> viewModel.increaseQuantity(item) },
             onDecreaseQty = { item -> viewModel.decreaseQuantity(item) },
             onDeleteItem = { item -> viewModel.deleteItem(item) },
@@ -83,6 +90,10 @@ class CartActivity : AppCompatActivity() {
                 viewModel.deleteItem(item)
             }
         }
+
+        binding.swipeRefreshCart.setOnRefreshListener {
+            viewModel.fetchCart(showLoading = false)
+        }
     }
 
     private fun observeCartState() {
@@ -91,9 +102,13 @@ class CartActivity : AppCompatActivity() {
                 viewModel.cartState.collect { state ->
                     when (state) {
                         is UiState.Loading -> {
-                            binding.rvCart.visibility = View.GONE
+                            // Jangan sembunyikan rvCart jika sebelumnya sudah ada item agar tidak hilang-muncul
+                            if (cartAdapter.itemCount == 0) {
+                                binding.rvCart.visibility = View.GONE
+                            }
                         }
                         is UiState.Success -> {
+                            binding.swipeRefreshCart.isRefreshing = false
                             binding.rvCart.visibility = View.VISIBLE
                             cartAdapter.submitList(state.data) {
                                 updateSummary()
@@ -101,13 +116,17 @@ class CartActivity : AppCompatActivity() {
                             binding.tvCartItemCountBadge.text = "(${state.data.size} Produk)"
                         }
                         is UiState.Empty -> {
+                            binding.swipeRefreshCart.isRefreshing = false
                             binding.rvCart.visibility = View.GONE
                             cartAdapter.submitList(emptyList())
                             updateSummary()
                             binding.tvCartItemCountBadge.text = "(0 Produk)"
                         }
                         is UiState.Error -> {
-                            binding.rvCart.visibility = View.GONE
+                            binding.swipeRefreshCart.isRefreshing = false
+                            if (cartAdapter.itemCount == 0) {
+                                binding.rvCart.visibility = View.GONE
+                            }
                         }
                     }
                 }

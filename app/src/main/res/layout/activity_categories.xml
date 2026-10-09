@@ -31,15 +31,15 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/btnSearchShortcut"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:gravity="center"
-                android:text="⌕"
-                android:textColor="@color/onSurfaceVariant"
-                android:textSize="26sp" />
+                android:contentDescription="Cari"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/onSurfaceVariant" />
 
             <FrameLayout
                 android:id="@+id/btnCartShortcut"
@@ -48,12 +48,13 @@
                 android:layout_marginStart="4dp"
                 android:background="?attr/selectableItemBackgroundBorderless">
 
-                <TextView
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="🛒"
-                    android:textSize="20sp" />
+                    android:contentDescription="Keranjang"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_menu_add"
+                    app:tint="@color/onSurfaceVariant" />
 
                 <TextView
                     android:layout_width="18dp"
@@ -70,16 +71,13 @@
                     android:textStyle="bold" />
             </FrameLayout>
 
-            <TextView
+            <ImageView
                 android:id="@+id/ivProfileInitial"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/bg_circle_btn"
-                android:backgroundTint="@color/colorPrimary"
-                android:gravity="center"
-                android:text="👤"
-                android:textSize="16sp" />
+                android:contentDescription="Profil"
+                android:src="@mipmap/ic_person" />
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -106,12 +104,12 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="12dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="⌕"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24sp" />
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Cari"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:tint="@color/colorPrimary" />
 
                 <EditText
                     android:id="@+id/searchCategory"
@@ -141,13 +139,14 @@
                     android:visibility="gone"
                     tools:visibility="visible" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/btnVoiceSearch"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="🎙"
-                    android:textSize="20sp" />
+                    android:padding="8dp"
+                    android:contentDescription="Suara"
+                    android:src="@android:drawable/ic_btn_speak_now"
+                    app:tint="@color/colorPrimary" />
             </LinearLayout>
 
             <!-- ===== FEATURED SEASONAL CATEGORY BANNER ===== -->
@@ -178,7 +177,7 @@
                             android:background="@drawable/bg_filter_pill_inactive"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="3dp"
-                            android:text="🔥 PILIHAN MUSIM INI"
+                            android:text="PILIHAN MUSIM INI"
                             android:textColor="@color/colorPrimary"
                             android:textSize="10sp"
                             android:textStyle="bold" />
@@ -220,12 +219,7 @@
                         android:layout_marginStart="12dp"
                         android:background="@drawable/bg_category_icon_v2">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="🎧⌚"
-                            android:textSize="28sp" />
+                        <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="Promo" android:padding="14dp" android:src="@android:drawable/ic_menu_manage" app:tint="@color/colorPrimary" />
                     </FrameLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -286,84 +280,84 @@
 
                     <!-- 1 Elektronik -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFE0B2" android:text="💻" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFFFE0B2" android:contentDescription="Elektronik" android:src="@android:drawable/ic_menu_manage" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Elektronik" />
                         <TextView style="@style/CategoryCountText" android:text="1.240 item" />
                     </LinearLayout>
 
                     <!-- 2 Fashion Pria -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFBBDEFB" android:text="👕" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFBBDEFB" android:contentDescription="Pria" android:src="@android:drawable/ic_menu_gallery" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Pria" />
                         <TextView style="@style/CategoryCountText" android:text="3.820 item" />
                     </LinearLayout>
 
                     <!-- 3 Fashion Wanita -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFF8BBD0" android:text="👗" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFF8BBD0" android:contentDescription="Wanita" android:src="@android:drawable/ic_menu_edit" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Wanita" />
                         <TextView style="@style/CategoryCountText" android:text="4.150 item" />
                     </LinearLayout>
 
                     <!-- 4 Kecantikan -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFCDD2" android:text="✨" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFFFCDD2" android:contentDescription="Kecantikan" android:src="@android:drawable/ic_menu_agenda" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Kecantikan" />
                         <TextView style="@style/CategoryCountText" android:text="2.410 item" />
                     </LinearLayout>
 
                     <!-- 5 Perabot -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFECB3" android:text="🪑" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFFFECB3" android:contentDescription="Perabot" android:src="@android:drawable/ic_menu_upload" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Perabot" />
                         <TextView style="@style/CategoryCountText" android:text="1.890 item" />
                     </LinearLayout>
 
                     <!-- 6 Kuliner -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFC8E6C9" android:text="🍽" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFC8E6C9" android:contentDescription="Kuliner" android:src="@android:drawable/ic_menu_crop" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Kuliner" />
                         <TextView style="@style/CategoryCountText" android:text="950 item" />
                     </LinearLayout>
 
                     <!-- 7 Olahraga -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFB2DFDB" android:text="🏋" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFB2DFDB" android:contentDescription="Olahraga" android:src="@android:drawable/ic_menu_compass" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Olahraga" />
                         <TextView style="@style/CategoryCountText" android:text="780 item" />
                     </LinearLayout>
 
                     <!-- 8 Gaming -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFC5CAE9" android:text="🎮" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFC5CAE9" android:contentDescription="Gaming" android:src="@android:drawable/ic_media_play" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Gaming" />
                         <TextView style="@style/CategoryCountText" android:text="1.120 item" />
                     </LinearLayout>
 
                     <!-- 9 Otomotif -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFD1C4E9" android:text="🏍" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFD1C4E9" android:contentDescription="Otomotif" android:src="@android:drawable/ic_menu_directions" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Otomotif" />
                         <TextView style="@style/CategoryCountText" android:text="640 item" />
                     </LinearLayout>
 
                     <!-- 10 Aksesoris -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFFFF9C4" android:text="⌚" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFFFF9C4" android:contentDescription="Aksesoris" android:src="@android:drawable/ic_menu_recent_history" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Aksesoris" />
                         <TextView style="@style/CategoryCountText" android:text="2.100 item" />
                     </LinearLayout>
 
                     <!-- 11 Hobi -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFB2EBF2" android:text="📷" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFB2EBF2" android:contentDescription="Hobi" android:src="@android:drawable/ic_menu_camera" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Hobi" />
                         <TextView style="@style/CategoryCountText" android:text="530 item" />
                     </LinearLayout>
 
                     <!-- 12 Kesehatan -->
                     <LinearLayout style="@style/CategoryGridItem" android:layout_columnWeight="1">
-                        <TextView style="@style/CategoryIconBox" android:backgroundTint="#FFB2DFDB" android:text="⚕" />
+                        <ImageView style="@style/CategoryIconBox" android:backgroundTint="#FFB2DFDB" android:contentDescription="Olahraga" android:src="@android:drawable/ic_menu_compass" app:tint="@color/colorPrimary" />
                         <TextView style="@style/CategoryNameText" android:text="Kesehatan" />
                         <TextView style="@style/CategoryCountText" android:text="890 item" />
                     </LinearLayout>
@@ -387,7 +381,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="📈  Subkategori Populer"
+                        android:text="Subkategori Populer"
                         android:textColor="@color/textPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -414,12 +408,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_active" android:gravity="center" android:paddingHorizontal="14dp" android:text="🎧  Headphone Nirkabel" android:textColor="@color/colorPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="⌚  Smartwatch" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="👔  Baju Kemeja Pria" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="👟  Sneakers Pria" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="🧴  Skincare Serum" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="🍳  Peralatan Masak" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_active" android:gravity="center" android:paddingHorizontal="14dp" android:text="Headphone Nirkabel" android:textColor="@color/colorPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="Smartwatch" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="Baju Kemeja Pria" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="Sneakers Pria" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="Skincare Serum" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="36dp" android:background="@drawable/bg_filter_pill_inactive" android:gravity="center" android:paddingHorizontal="14dp" android:text="Peralatan Masak" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" />
                     </LinearLayout>
                 </HorizontalScrollView>
             </LinearLayout>
@@ -478,13 +472,7 @@
                     android:orientation="horizontal"
                     android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_category_icon_v2"
-                        android:gravity="center"
-                        android:text="🎧"
-                        android:textSize="24sp" />
+                    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_category_icon_v2" android:contentDescription="AudioTech" android:padding="12dp" android:src="@android:drawable/ic_menu_manage" app:tint="@color/colorPrimary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -531,13 +519,7 @@
                     android:orientation="horizontal"
                     android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_category_icon_v2"
-                        android:gravity="center"
-                        android:text="👟"
-                        android:textSize="24sp" />
+                    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_category_icon_v2" android:contentDescription="AudioTech" android:padding="12dp" android:src="@android:drawable/ic_menu_manage" app:tint="@color/colorPrimary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -584,13 +566,7 @@
                     android:orientation="horizontal"
                     android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_category_icon_v2"
-                        android:gravity="center"
-                        android:text="🌸"
-                        android:textSize="24sp" />
+                    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_category_icon_v2" android:contentDescription="AudioTech" android:padding="12dp" android:src="@android:drawable/ic_menu_manage" app:tint="@color/colorPrimary" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -638,11 +614,7 @@
                 android:orientation="horizontal"
                 android:padding="12dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🛡"
-                    android:textSize="18sp" />
+                <ImageView android:layout_width="20dp" android:layout_height="20dp" android:contentDescription="Keamanan" android:src="@android:drawable/checkbox_on_background" app:tint="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="wrap_content"

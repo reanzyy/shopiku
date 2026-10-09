@@ -29,26 +29,21 @@ class ReviewAdapter : ListAdapter<Review, ReviewAdapter.ReviewViewHolder>(DiffCa
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(review: Review) {
-            binding.tvReviewUsername.text = "Pembeli Shopiku"
+            binding.tvReviewUsername.text = review.userName?.takeIf { it.isNotBlank() } ?: "Pembeli Shopiku"
             binding.ratingBarReview.rating = review.rating.toFloat()
             binding.tvReviewDate.text = formatDate(review.createdAt)
-            binding.tvReviewComment.text = review.comment.takeIf { !it.isNull0rBlank() } ?: "Tidak ada ulasan tertulis."
+            binding.tvReviewComment.text = review.comment.takeIf { !it.isNullOrBlank() } ?: "Tidak ada ulasan tertulis."
 
-            // Hide fields not present in backend database schema
+            // Sembunyikan field yang tidak digunakan di backend schema
             binding.tvReviewVariant.visibility = View.GONE
             binding.reviewPhotosContainer.parent?.let { parent ->
                 if (parent is View) parent.visibility = View.GONE
             }
         }
 
-        private fun String?.isNull0rBlank(): Boolean {
-            return this == null || this.trim().isEmpty()
-        }
-
         private fun formatDate(rawDate: String?): String {
             if (rawDate.isNullOrBlank()) return ""
             return try {
-                // ISO string e.g. "2024-10-09T10:00:00Z" -> extract "09 Oct 2024" or simple substring
                 if (rawDate.contains("T")) {
                     val datePart = rawDate.split("T")[0]
                     val parts = datePart.split("-")

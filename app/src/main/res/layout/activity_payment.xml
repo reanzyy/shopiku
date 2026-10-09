@@ -6,10 +6,10 @@
     <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/colorSurface" app:elevation="2dp">
         <LinearLayout android:layout_width="match_parent" android:layout_height="64dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
             <ImageView android:id="@+id/ivPaymentBack" android:layout_width="44dp" android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Kembali" android:padding="10dp" android:src="@android:drawable/ic_media_previous" app:tint="@color/textPrimary"/>
-            <ImageView android:id="@+id/ivPaymentLogo" android:layout_width="28dp" android:layout_height="28dp" android:contentDescription="Logo" android:src="@drawable/ic_launcher_foreground"/>
+            <ImageView android:id="@+id/ivPaymentLogo" android:layout_width="28dp" android:layout_height="28dp" android:contentDescription="Logo" android:src="@mipmap/ic_launcher"/>
             <TextView android:id="@+id/tvPaymentTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_weight="1" android:text="Checkout" android:textColor="@color/textPrimary" android:textSize="16sp" android:textStyle="bold"/>
             <ImageView android:id="@+id/ivPaymentShare" android:layout_width="44dp" android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Bagikan" android:padding="10dp" android:src="@android:drawable/ic_menu_share" app:tint="@color/onSurfaceVariant"/>
-            <ImageView android:id="@+id/ivPaymentAvatar" android:layout_width="32dp" android:layout_height="32dp" android:contentDescription="Profil" android:src="@mipmap/ic_launcher"/>
+            <ImageView android:id="@+id/ivPaymentAvatar" android:layout_width="32dp" android:layout_height="32dp" android:contentDescription="Profil" android:src="@mipmap/ic_person"/>
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:clipToPadding="false" android:paddingBottom="112dp" app:layout_behavior="@string/appbar_scrolling_view_behavior">

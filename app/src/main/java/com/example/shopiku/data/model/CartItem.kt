@@ -13,8 +13,16 @@ data class CartItem(
     val id: String? = null,
 
     @SerialName("productId")
-    @SerializedName("productId")
+    @SerializedName("productId", alternate = ["product_id"])
     val productId: String,
+
+    @SerialName("variantId")
+    @SerializedName("variantId", alternate = ["variant_id"])
+    val variantId: Long? = null,
+
+    @SerialName("variantName")
+    @SerializedName("variantName", alternate = ["variant_name"])
+    val variantName: String? = null,
 
     @SerialName("name")
     @SerializedName("name")
@@ -29,7 +37,7 @@ data class CartItem(
     var quantity: Int,
 
     @SerialName("imageUrl")
-    @SerializedName("imageUrl")
+    @SerializedName("imageUrl", alternate = ["image_url"])
     val imageUrl: String
 ) {
     fun getFormattedPrice(): String {

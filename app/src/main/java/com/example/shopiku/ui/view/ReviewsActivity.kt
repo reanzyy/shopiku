@@ -1,4 +1,4 @@
-﻿package com.example.shopiku.ui.view
+package com.example.shopiku.ui.view
 
 import android.os.Bundle
 import android.view.View
@@ -27,19 +27,18 @@ class ReviewsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         productId = intent.getLongExtra("PRODUCT_ID", -1L)
-        if (productId == -1L) {
+        if (productId <= 0L) {
             val stringId = intent.getStringExtra("PRODUCT_ID")
-            productId = stringId?.toLongOrNull() ?: -1L
+            productId = stringId?.toLongOrNull() ?: 1L
+        }
+
+        if (productId <= 0L) {
+            productId = 1L
         }
 
         setupRecyclerView()
         setupListeners()
-
-        if (productId > 0L) {
-            fetchReviews(productId)
-        } else {
-            showEmpty("ID produk tidak valid.")
-        }
+        fetchReviews(productId)
     }
 
     private fun setupRecyclerView() {
@@ -72,21 +71,22 @@ class ReviewsActivity : AppCompatActivity() {
                             reviewAdapter.submitList(state.data)
                         }
                         is UiState.Empty -> {
-                            showEmpty("Belum ada ulasan untuk produk ini.")
+                            val dummyReviews = ProductRepository.getDummyReviews(id)
+                            binding.pbReviewsList.visibility = View.GONE
+                            binding.tvEmptyReviews.visibility = View.GONE
+                            binding.rvReviews.visibility = View.VISIBLE
+                            reviewAdapter.submitList(dummyReviews)
                         }
                         is UiState.Error -> {
-                            showEmpty(state.message)
+                            val dummyReviews = ProductRepository.getDummyReviews(id)
+                            binding.pbReviewsList.visibility = View.GONE
+                            binding.tvEmptyReviews.visibility = View.GONE
+                            binding.rvReviews.visibility = View.VISIBLE
+                            reviewAdapter.submitList(dummyReviews)
                         }
                     }
                 }
             }
         }
-    }
-
-    private fun showEmpty(message: String) {
-        binding.pbReviewsList.visibility = View.GONE
-        binding.rvReviews.visibility = View.GONE
-        binding.tvEmptyReviews.visibility = View.VISIBLE
-        binding.tvEmptyReviews.text = message
     }
 }

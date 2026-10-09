@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Selamat Datang Kembali 👋"
+                    android:text="Selamat Datang Kembali"
                     android:textColor="#1B1C1C"
                     android:textSize="28sp"
                     android:textStyle="bold"

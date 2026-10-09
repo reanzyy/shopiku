@@ -24,7 +24,7 @@
             android:layout_height="@dimen/review_avatar"
             android:contentDescription="@string/review_avatar_desc"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_person"
             app:shapeAppearanceOverlay="@style/CircleImageView" />
 
         <!-- Info User -->

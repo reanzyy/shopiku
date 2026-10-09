@@ -75,12 +75,7 @@
                 android:layout_marginStart="4dp"
                 android:background="?attr/selectableItemBackgroundBorderless">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="🛒"
-                    android:textSize="20sp" />
+                <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:padding="10dp" android:contentDescription="Keranjang" android:src="@android:drawable/ic_menu_add" app:tint="@color/onSurfaceVariant" />
 
                 <TextView
                     android:id="@+id/tvCartBadgeCount"
@@ -156,11 +151,7 @@
                 android:visibility="gone"
                 tools:visibility="gone">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="⚠️"
-                    android:textSize="48sp" />
+                <ImageView android:layout_width="48dp" android:layout_height="48dp" android:contentDescription="Kosong" android:src="@android:drawable/ic_menu_search" app:tint="@color/onSurfaceVariant" />
 
                 <TextView
                     android:id="@+id/tvErrorMessage"
@@ -194,11 +185,7 @@
                 android:visibility="gone"
                 tools:visibility="gone">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📦"
-                    android:textSize="48sp" />
+                <ImageView android:layout_width="48dp" android:layout_height="48dp" android:contentDescription="Kosong" android:src="@android:drawable/ic_menu_search" app:tint="@color/onSurfaceVariant" />
 
                 <TextView
                     android:layout_width="wrap_content"
